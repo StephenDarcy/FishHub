@@ -1,6 +1,8 @@
 import React from "react";
-import "./App.css";
+import "./Styles/App.css";
 import axios from "axios";
+import Navbar from "./Components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   function postFish() {
@@ -12,6 +14,7 @@ function App() {
         console.error(err);
       });
   }
+
   const [data, setData] = React.useState(null);
   const [fish, setFish] = React.useState("");
 
@@ -24,14 +27,22 @@ function App() {
   console.log(data);
 
   return (
-    <div className="App">
-      <label>
-        Search for a fish:
-        <input type="text" onChange={(e) => setFish(e.target.value)} />
-      </label>
-      <button onClick={postFish}>Submit</button>
-      <p>{!data ? "Loading..." : data.Species}</p>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" />
+          </Routes>
+          <label>
+            Search for a fish:
+            <input type="text" onChange={(e) => setFish(e.target.value)} />
+          </label>
+          <button onClick={postFish}>Submit</button>
+          <p>{!data ? "Loading..." : data.Species}</p>
+        </div>
+      </Router>
+    </>
   );
 }
 

@@ -1,46 +1,29 @@
 import React from "react";
 import "./Styles/App.css";
-import axios from "axios";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import CompatibilityTool from "./Pages/CompatibilityTool";
+import AdvancedSearch from "./Pages/AdvancedSearch";
+import AquariumC02 from "./Pages/AquariumC02";
+import AquariumSize from "./Pages/AquariumSize";
+import Forums from "./Pages/Forums";
+import SpeciesProfile from "./Pages/SpeciesProfile";
 
 function App() {
-  function postFish() {
-    console.log(fish);
-    axios
-      .post("http://localhost:3001/fish", { name: fish })
-      .then(() => console.log("fish sent"))
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  const [data, setData] = React.useState(null);
-  const [fish, setFish] = React.useState("");
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
-  console.log(data);
-
   return (
     <>
       <Router>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" />
-          </Routes>
-          <label>
-            Search for a fish:
-            <input type="text" onChange={(e) => setFish(e.target.value)} />
-          </label>
-          <button onClick={postFish}>Submit</button>
-          <p>{!data ? "Loading..." : data.Species}</p>
-        </div>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/compatibility" element={<CompatibilityTool />} />
+          <Route path="/adv-search" element={<AdvancedSearch />} />
+          <Route path="/c02" element={<AquariumC02 />} />
+          <Route path="/size" element={<AquariumSize />} />
+          <Route path="/forums" element={<Forums />} />
+          <Route path="/species-profile" element={<SpeciesProfile />} />
+        </Routes>
       </Router>
     </>
   );

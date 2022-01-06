@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function SpeciesProfile() {
+export default function AquariumC02() {
   return <div></div>;
 }

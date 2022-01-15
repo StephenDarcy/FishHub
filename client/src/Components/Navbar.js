@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { IoMdClose as CloseIcon } from "react-icons/io";
 import { SidebarData as SidebarItems } from "../Data/SidebarData";
+import { FaRegUserCircle as AccountIcon } from "react-icons/fa";
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -18,6 +19,7 @@ function Navbar() {
         <Container fluid>
           <MenuIcon onClick={handleShow} />
           <BootstrapNavbar.Brand href="">FishHub</BootstrapNavbar.Brand>
+          <AccountIcon />
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>
               <CloseIcon onClick={handleClose} />

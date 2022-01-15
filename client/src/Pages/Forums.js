@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function Forums() {
-  return <div></div>;
+  return (
+    <div>
+      <h1>Forums</h1>
+    </div>
+  );
 }

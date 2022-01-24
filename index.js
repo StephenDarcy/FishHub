@@ -1,12 +1,15 @@
 const express = require("express");
+var cors = require("cors");
+const R = require("r-script");
+const mongoose = require("mongoose");
+
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
-
 const app = express();
-const R = require("r-script");
+
 var out;
 
-var cors = require("cors");
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
@@ -15,6 +18,26 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// MongoDB Connection
+const uri = process.env.ATLAS_URI;
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const connection = mongoose.connection;
+
+try {
+  connection.once("open", () => {
+    console.log("MongoDB database connection established successfully");
+  });
+} catch (e) {
+  console.log(e);
+}
+
+// Mongo Requests
+const usersRouter = require("./routes/users");
+app.use("/users", usersRouter);
+
+// Api
 app.get("/api", (req, res) => {
   res.json({ message: out[0] });
 });

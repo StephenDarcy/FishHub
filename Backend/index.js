@@ -44,7 +44,7 @@ app.get("/api", (req, res) => {
 
 app.post("/fish", function (req, res) {
   var fishName = req.body.name;
-  console.log("name recieved: " + fishName);
+  console.log("name received: " + fishName);
   out = R("./R Scripts/fishbase.R").data(fishName).callSync();
   console.log(out);
 });

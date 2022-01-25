@@ -1,14 +1,16 @@
 import React from "react";
 import "./Styles/App.css";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/Navbar.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import CompatibilityTool from "./Pages/CompatibilityTool";
-import AdvancedSearch from "./Pages/AdvancedSearch";
-import AquariumC02 from "./Pages/AquariumC02";
-import AquariumSize from "./Pages/AquariumSize";
-import Forums from "./Pages/Forums";
-import SpeciesProfile from "./Pages/SpeciesProfile";
+import Home from "./Pages/Home.jsx";
+import CompatibilityTool from "./Pages/CompatibilityTool.jsx";
+import AdvancedSearch from "./Pages/AdvancedSearch.jsx";
+import AquariumC02 from "./Pages/AquariumC02.jsx";
+import AquariumSize from "./Pages/AquariumSize.jsx";
+import Forums from "./Pages/Forums.jsx";
+import SpeciesProfile from "./Pages/SpeciesProfile.jsx";
+import Login from "./Pages/Login.jsx";
+import Signup from "./Pages/Signup.jsx";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/size" element={<AquariumSize />} />
           <Route path="/forums" element={<Forums />} />
           <Route path="/species-profile" element={<SpeciesProfile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </Router>
     </>

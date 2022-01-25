@@ -2,19 +2,30 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import UniversalModal from "../Components/UniversalModal";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [signedUp, setSignedUp] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [redirect, setRedirect] = useState(false);
 
   const addUserEndpoint = "http://localhost:3000/users/add";
 
   const verifyPassword = (firstPassword, secondPassword) => {
     return firstPassword == secondPassword;
+  };
+
+  const startNavigate = () => {
+    setTimeout(() => {
+      setRedirect(true);
+      console.log("redirecting to login page");
+    }, 2000);
   };
 
   const handleSubmit = (e) => {
@@ -38,10 +49,29 @@ export default function Signup() {
         .catch((error) => {
           console.error(error);
         });
+      setSignedUp(true);
     } else {
       console.log("Passwords do not match");
     }
   };
+
+  if (signedUp) {
+    startNavigate();
+
+    if (redirect) {
+      return <Navigate to="/login" />;
+    }
+
+    return (
+      <>
+        <UniversalModal
+          show={true}
+          title="Account successfully created!"
+          body="You will now be redirected to sign in"
+        />
+      </>
+    );
+  }
 
   return (
     <Container fluid>

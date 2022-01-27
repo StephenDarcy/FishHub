@@ -27,7 +27,11 @@ const userSchema = new Schema(
         "Please fill a valid email address",
       ],
     },
-    password: { type: String, required: true, trim: true },
+    passwordHash: {
+      type: String,
+      required: "Password is required",
+      trim: true,
+    },
   },
   {
     timestamps: true,

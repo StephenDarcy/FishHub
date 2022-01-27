@@ -9,10 +9,22 @@ router.route("/").get((req, res) => {
 });
 
 // adding new user to DB
-router.route("/add").post((req, res) => {
+router.route("/add").post(async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
+
+  // validating username not taken
+  const usernameTaken = User.findOne({ username });
+  if (usernameTaken) {
+    return res.status(400).json({ error: "This username is taken" });
+  }
+
+  // validating email not taken
+  const emailTaken = User.findOne({ email });
+  if (emailTaken) {
+    return res.status(400).json({ error: "This email is taken" });
+  }
 
   const newUser = new User({ username, email, password });
 

@@ -45,11 +45,11 @@ export default function Signup() {
         .then((response) => {
           console.log(response.status);
           console.log(response.data);
+          setSignedUp(true);
         })
         .catch((error) => {
           console.error(error);
         });
-      setSignedUp(true);
     } else {
       console.log("Passwords do not match");
     }

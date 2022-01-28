@@ -39,7 +39,7 @@ app.use("/users", usersRouter);
 
 // Api
 app.get("/api", (req, res) => {
-  res.json({ message: out[0] });
+  res.json({ message: "test" });
 });
 
 app.post("/fish", function (req, res) {

@@ -1,5 +1,5 @@
 {
-  "name": "r-script-sample",
+  "name": "FishHub",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,6 +19,7 @@
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.7"
+    "mongoose": "^6.1.7",
+    "r-script": "^0.0.4"
   }
 }

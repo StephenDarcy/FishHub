@@ -15,7 +15,7 @@ export default function Signup() {
   // eslint-disable-next-line no-unused-vars
   const [redirect, setRedirect] = useState(false);
 
-  const addUserEndpoint = "http://localhost:3000/users/add";
+  const addUserEndpoint = `${process.env.REACT_APP_API_URL}/users/add`;
 
   const verifyPassword = (firstPassword, secondPassword) => {
     return firstPassword == secondPassword;

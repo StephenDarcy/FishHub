@@ -5,7 +5,7 @@ function Home() {
   function postFish() {
     console.log(fish);
     axios
-      .post("http://localhost:3001/fish", { name: fish })
+      .post(`${process.env.REACT_APP_API_URL}/fish`, { name: fish })
       .then(() => console.log("fish sent"))
       .catch((err) => {
         console.error(err);

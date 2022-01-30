@@ -5,7 +5,7 @@ function Home() {
   function postFish() {
     console.log(fish);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fish`, {
+      .get(`${process.env.REACT_APP_API_URL}/fish/scientific`, {
         params: {
           common: fish,
         },

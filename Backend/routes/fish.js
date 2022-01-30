@@ -13,10 +13,3 @@ router.route("/fish/:common").get((req, res) => {
     res.status(400).json("Error: " + err);
   }
 });
-
-app.post("/fish", function (req, res) {
-  var fishName = req.body.name;
-  console.log("name received: " + fishName);
-  out = R("./R Scripts/fishbase.R").data(fishName).callSync();
-  console.log(out);
-});

@@ -42,6 +42,10 @@ app.get("/api", (req, res) => {
   res.json({ message: "test" });
 });
 
+// R requests
+const fishRouter = require("./routes/fish");
+app.use("/fish", fishRouter);
+
 app.post("/fish", function (req, res) {
   var fishName = req.body.name;
   console.log("name received: " + fishName);

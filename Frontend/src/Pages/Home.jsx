@@ -5,8 +5,12 @@ function Home() {
   function postFish() {
     console.log(fish);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/fish`, { name: fish })
-      .then(() => console.log("fish sent"))
+      .get(`${process.env.REACT_APP_API_URL}/fish`, {
+        params: {
+          common: fish,
+        },
+      })
+      .then((response) => setData(response.data))
       .catch((err) => {
         console.error(err);
       });
@@ -14,12 +18,6 @@ function Home() {
 
   const [data, setData] = React.useState(null);
   const [fish, setFish] = React.useState("");
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   console.log(data);
   return (

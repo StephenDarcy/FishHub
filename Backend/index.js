@@ -11,7 +11,7 @@ const app = express();
 var out;
 
 var corsOptions = {
-  origin: "https://fishhub.tech",
+  origin: "https://fishhub-client.netlify.app",
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));

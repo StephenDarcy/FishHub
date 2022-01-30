@@ -11,7 +11,7 @@ const app = express();
 var out;
 
 var corsOptions = {
-  origin: "*",
+  origin: "https://fishhub-backend.herokuapp.com/",
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));

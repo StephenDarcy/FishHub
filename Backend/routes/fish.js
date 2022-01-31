@@ -5,7 +5,7 @@ const R = require("r-script");
 router.route("/scientific/:common").get((req, res) => {
   var fishName = req.params.common;
   console.log("name received: " + fishName);
-  let scientificName = R("./R Scripts/fishbase.R").data(fishName).callSync();
+  let scientificName = R("../R Scripts/fishbase.R").data(fishName).callSync();
   console.log(scientificName);
   try {
     res.json(scientificName);

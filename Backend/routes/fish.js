@@ -8,7 +8,7 @@ router.route("/scientific/:common").get((req, res) => {
   let scientificName = R("./R Scripts/fishbase.R").data(fishName).callSync();
   console.log(scientificName);
   try {
-    res.json("scientificName");
+    res.json(scientificName);
   } catch (err) {
     res.status(400).json("Error: " + err);
   }

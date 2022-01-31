@@ -1,4 +1,5 @@
 # common-to-sci.R
+# used to turn common fishname to scientific
 needs(rfishbase)
 attach(input[[1]])
 

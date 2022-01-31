@@ -3,12 +3,16 @@ const R = require("r-script");
 
 // getting scientific name from common
 router.route("/scientific/:common").get((req, res) => {
-  var fishName = req.params.common;
-  console.log("name received: " + fishName);
-  let scientificName = R("../R Scripts/fishbase.R").data(fishName).callSync();
-  console.log(scientificName);
+  console.log("name received: " + req.params.common);
+
+  R("../R Scripts/common-to-sci.R")
+    .data({ commonName: req.params.common })
+    .call(function (err, d) {
+      if (err) throw err;
+      console.log(d);
+    });
   try {
-    res.json(scientificName);
+    res.json(d);
   } catch (err) {
     res.status(400).json("Error: " + err);
   }

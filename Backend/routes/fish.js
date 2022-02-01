@@ -5,14 +5,11 @@ const R = require("r-script");
 router.route("/scientific/:common").get((req, res) => {
   console.log("name received: " + req.params.common);
 
-  R("../R Scripts/common-to-sci.R")
+  var answer = R("../R Scripts/common-to-sci.R")
     .data({ commonName: req.params.common })
-    .call(function (err, d) {
-      if (err) throw err;
-      console.log(d);
-    });
+    .callSync();
   try {
-    res.json(d);
+    res.json(answer);
   } catch (err) {
     res.status(400).json("Error: " + err);
   }

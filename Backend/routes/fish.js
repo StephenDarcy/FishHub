@@ -7,6 +7,7 @@ router.route("/scientific/:common").get((req, res) => {
   let commonName = req.params.common;
 
   let out = R("./R Scripts/common-to-sci.R").data(commonName).callSync();
+  console.log(out);
   try {
     res.json(out);
   } catch (err) {

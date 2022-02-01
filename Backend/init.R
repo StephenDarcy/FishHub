@@ -1,1 +1,1 @@
-helpers.installPackages("duckdb")
+helpers.installPackages("duckdb, rfishbase")

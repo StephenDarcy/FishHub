@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Home() {
-  function postFish() {
-    console.log(fish);
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/fish/scientific`, {
-        params: {
-          common: fish,
-        },
-      })
-      .then((response) => setData(response.data))
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = useState([]);
+  const [fish, setFish] = useState("");
+  const [search, setSearch] = useState("");
 
-  const [data, setData] = React.useState(null);
-  const [fish, setFish] = React.useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        `${process.env.REACT_APP_API_URL}/fish/scientific/${search}`
+      );
 
-  console.log(data);
+      setData(result.data);
+    };
+
+    fetchData();
+  }, [search]);
+
   return (
     <>
       {" "}
@@ -27,8 +26,12 @@ function Home() {
         Search for a fish:
         <input type="text" onChange={(e) => setFish(e.target.value)} />
       </label>
-      <button onClick={postFish}>Submit</button>
-      <p>{!data ? "Loading..." : data.Species}</p>
+      <button onClick={() => setSearch(fish)}>Submit</button>
+      <ul>
+        {data.map((species) => (
+          <li key={species.SpecCode}>{species.ComName}</li>
+        ))}
+      </ul>
     </>
   );
 }

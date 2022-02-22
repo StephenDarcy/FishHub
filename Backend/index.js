@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 var out;
@@ -19,19 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
-const uri = process.env.ATLAS_URI;
+const uri = "mongodb://mongo:27017/FishHubDB"; //process.env.ATLAS_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
-
-try {
-  connection.once("open", () => {
-    console.log("MongoDB database connection established successfully");
-  });
-} catch (e) {
-  console.log(e);
-}
 
 // Mongo Requests
 const usersRouter = require("./routes/users");
@@ -55,4 +47,12 @@ app.post("/fish", function (req, res) {
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
+
+  try {
+    connection.once("open", () => {
+      console.log("MongoDB database connection established successfully");
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });

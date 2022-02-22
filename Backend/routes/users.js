@@ -52,6 +52,8 @@ router.route("/add").post(async (req, res) => {
       httpOnly: true,
     })
     .send();
+
+  console.log("");
 });
 
 // getting user info with mongo object id

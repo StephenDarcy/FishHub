@@ -1,27 +1,19 @@
 version: "3.8"
 
 services:
-  # Backend
-  Backend:
-    build: ./Backend
-    expose:
-      - ${APP_SERVER_PORT}
-    environment:
-      API_HOST: ${API_HOST}
-      APP_SERVER_PORT: ${APP_SERVER_PORT}
+  ui:
+    build: ./frontend
     ports:
-      - ${APP_SERVER_PORT}:${APP_SEVER_PORT}
-    command: npm start
-
-  # Frontend
-  Frontend:
-    build: ./Frontend
-    environment:
-      - REACT_APP_PORT=${REACT_APP_PORT}
-    expose:
-      - ${REACT_APP_PORT}
+      - "3000:3000"
+    depends_on:
+      - api
+  api:
+    build: ./backend
     ports:
-      - ${REACT_APP_PORT}:${REACT_APP_PORT}
-    links:
-      - Backend
-    command: npm start
+      - "8080:8080"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

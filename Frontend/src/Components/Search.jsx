@@ -15,9 +15,7 @@ function Search() {
     e.preventDefault();
 
     try {
-      let res = await axios(
-        `${process.env.REACT_APP_API_URL}/fish/scientific/${search}`
-      );
+      let res = await axios(`http://localhost:8000/common/${search}`);
       if (res.status === 200) {
         setData(res.data);
       } else {

@@ -3,12 +3,20 @@ version: "3.8"
 services:
   ui:
     build: ./frontend
+    volumes:
+      - /frontend:/srv/app/fishhub-frontend/frontend:rw
     ports:
       - "3000:3000"
     depends_on:
       - api
+  rfishbase:
+    build: ./rfishbase-api
+    ports:
+      - "8000:8000"
   api:
     build: ./backend
+    volumes:
+      - /backend:/srv/app/fishhub-backend/backend:rw
     ports:
       - "8080:8080"
     depends_on:

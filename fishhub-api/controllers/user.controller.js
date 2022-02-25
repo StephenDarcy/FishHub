@@ -13,22 +13,18 @@ exports.findAll = (req, res) => {
 // adding new user to DB
 exports.create = async (req, res) => {
   // Validate request
-  if (!req.body.username) {
-    res.status(400).send({ message: "Username can not be empty!" });
-    return;
-  }
-  if (!req.body.email) {
-    res.status(400).send({ message: "Email can not be empty!" });
-    return;
-  }
-  if (!req.body.password) {
-    res.status(400).send({ message: "Password can not be empty!" });
+  if (!req.body.username || !req.body.email || !req.body.password) {
+    res
+      .status(400)
+      .send({ message: "Username/password/email can not be empty!" });
     return;
   }
 
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
+
+  console.log("Received: " + username, email, password);
 
   // validating username not taken
   const usernameTaken = await User.findOne({ username: username });
@@ -51,6 +47,11 @@ exports.create = async (req, res) => {
 
   // saving user
   const savedUser = await newUser.save();
+  if (!savedUser) {
+    return res.status(400).json({ error: "User could not be saved" });
+  } else {
+    console.log("User added");
+  }
 
   // create jwt token to sign user in
   const token = jwt.sign(

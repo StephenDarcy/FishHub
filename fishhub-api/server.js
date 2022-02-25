@@ -7,7 +7,7 @@ const PORT = process.env.NODE_DOCKER_PORT || 8080;
 const app = express();
 
 var corsOptions = {
-  origin: process.env.CLIENT_ORIGIN || "http://localhost:8081",
+  origin: /* process.env.CLIENT_ORIGIN || */ "http://localhost:8888",
 };
 app.use(cors(corsOptions));
 app.use(express.json());

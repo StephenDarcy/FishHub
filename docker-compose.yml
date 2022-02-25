@@ -32,15 +32,26 @@ services:
     networks:
       - backend
       - frontend
+
   fishhub-ui:
     depends_on:
       - fishhub-api
+      - rfishbase
     build:
       context: ./fishhub-ui
       args:
         - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
+        - REACT_APP_API_RFISHBASE_URL=$R_API_BASE_URL
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    networks:
+      - frontend
+
+  rfishbase:
+    build: ./rfishbase-api
+    env_file: ./.env
+    ports:
+      - $R_LOCAL_PORT:$R_DOCKER_PORT
     networks:
       - frontend
 volumes:

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import "../Styles/Search.css";
 import { FaSearch } from "react-icons/fa";
+import FishService from "../Services/FishService";
 
 function Search() {
   const [data, setData] = useState([]);
@@ -14,16 +14,20 @@ function Search() {
   let handleSearch = async (e) => {
     e.preventDefault();
 
-    try {
-      let res = await axios(`http://localhost:8000/common/${search}`);
-      if (res.status === 200) {
-        setData(res.data);
-      } else {
-        console.log("Error fetching search result");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    FishService.getScientific(search)
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+
+        if (response.status === 200) {
+          setData(response.data);
+        } else {
+          console.log("Error fetching search result");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

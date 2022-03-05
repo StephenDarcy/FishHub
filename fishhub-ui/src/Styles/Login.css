@@ -1,0 +1,58 @@
+.login-box {
+  background-color: white;
+  width: 40vw;
+  height: 70vh;
+  border-radius: 1%;
+  box-shadow: 3px 3px 3px #696969;
+}
+
+.form-check {
+  color: #b9b9b9;
+}
+
+.form-control {
+  height: 5vh;
+}
+
+.login-form {
+  margin-top: 10%;
+  height: 80vh;
+}
+
+.btn {
+  background-color: #26beff;
+  border: 0px;
+  height: 5vh;
+  width: 100% !important;
+}
+
+.btn:hover {
+  background-color: #26beff;
+}
+
+.signup-link {
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.login-row {
+  margin-top: 5%;
+}
+
+.form-row {
+  margin-top: 3%;
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 750px) {
+  .login-box {
+    width: 80vw;
+    height: 90vh;
+  }
+}
+/* Mobile Phone Responsiveness */
+@media screen and (max-height: 700px) {
+  .login-box {
+    overflow-y: scroll;
+  }
+}

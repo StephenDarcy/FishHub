@@ -1,0 +1,33 @@
+.signup-box {
+  background-color: white;
+  width: 40vw;
+  height: 70vh;
+  border-radius: 1%;
+  box-shadow: 3px 3px 3px #696969;
+  margin-top: 5%;
+  padding-top: 5%;
+  padding: 2%;
+}
+
+.btn {
+  margin-bottom: 3%;
+}
+
+.login-link {
+  text-decoration: none;
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 900px) {
+  .signup-box {
+    width: 90vw;
+    height: 80vh;
+  }
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-height: 700px) {
+  .signup-box {
+    overflow-y: scroll;
+  }
+}

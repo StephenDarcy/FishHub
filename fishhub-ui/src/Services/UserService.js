@@ -14,12 +14,20 @@ const update = (id, data) => {
 const remove = (id) => {
   return http.delete(`/users/${id}`);
 };
+const login = (data) => {
+  return http.post("/users/login/", data);
+};
+const logout = () => {
+  return http.get("/users/logout/");
+};
 
-const TutorialService = {
+const UserService = {
   getAll,
   get,
   create,
   update,
   remove,
+  login,
+  logout,
 };
-export default TutorialService;
+export default UserService;

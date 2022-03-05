@@ -8,6 +8,7 @@ const app = express();
 
 var corsOptions = {
   origin: /* process.env.CLIENT_ORIGIN || */ "http://localhost:8888",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(express.json());

@@ -12,63 +12,128 @@ exports.findAll = (req, res) => {
 
 // adding new user to DB
 exports.create = async (req, res) => {
-  // Validate request
-  if (!req.body.username || !req.body.email || !req.body.password) {
+  try {
+    // Validate request
+    if (!req.body.username || !req.body.email || !req.body.password) {
+      res
+        .status(400)
+        .send({ message: "Username/password/email can not be empty!" });
+      return;
+    }
+
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    console.log("Received: " + username, email, password);
+
+    // validating username not taken
+    const usernameTaken = await User.findOne({ username: username });
+    if (usernameTaken) {
+      return res.status(400).json({ error: "This username is taken" });
+    }
+
+    // validating email not taken
+    const emailTaken = await User.findOne({ email });
+    if (emailTaken) {
+      return res.status(400).json({ error: "This email is taken" });
+    }
+
+    // hashing user password
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    // creating new user
+    const newUser = new User({ username, email, passwordHash });
+
+    // saving user
+    const savedUser = await newUser.save();
+    if (!savedUser) {
+      return res.status(400).json({ error: "User could not be saved" });
+    } else {
+      console.log("User added");
+    }
+
+    // create jwt token to sign user in
+    const token = jwt.sign(
+      {
+        userID: savedUser._id,
+      },
+      process.env.JWT
+    );
+
+    // send the token
     res
-      .status(400)
-      .send({ message: "Username/password/email can not be empty!" });
-    return;
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
   }
+};
 
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
+// user login
+exports.login = async (req, res) => {
+  try {
+    // Validate request
+    if (!req.body.email || !req.body.password) {
+      res.status(400).send({ message: "Password/email can not be empty!" });
+      return;
+    }
 
-  console.log("Received: " + username, email, password);
+    const email = req.body.email;
+    const password = req.body.password;
 
-  // validating username not taken
-  const usernameTaken = await User.findOne({ username: username });
-  if (usernameTaken) {
-    return res.status(400).json({ error: "This username is taken" });
+    // validating user exists
+    const existingUser = await User.findOne({ email: email });
+    if (!existingUser) {
+      res.status(401).send({ message: "Invalid email/password" });
+      return;
+    }
+
+    // validate user password
+    const passwordValidate = await bcrypt.compare(
+      password,
+      existingUser.passwordHash
+    );
+
+    // if not correct password
+    if (!passwordValidate) {
+      res.status(401).send({ message: "Invalid email/password" });
+      return;
+    }
+
+    // create jwt token to sign user in
+    const token = jwt.sign(
+      {
+        userID: existingUser._id,
+      },
+      process.env.JWT
+    );
+
+    // send the token
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
   }
+};
 
-  // validating email not taken
-  const emailTaken = await User.findOne({ email });
-  if (emailTaken) {
-    return res.status(400).json({ error: "This email is taken" });
-  }
-
-  // hashing user password
-  const salt = await bcrypt.genSalt();
-  const passwordHash = await bcrypt.hash(password, salt);
-
-  // creating new user
-  const newUser = new User({ username, email, passwordHash });
-
-  // saving user
-  const savedUser = await newUser.save();
-  if (!savedUser) {
-    return res.status(400).json({ error: "User could not be saved" });
-  } else {
-    console.log("User added");
-  }
-
-  // create jwt token to sign user in
-  const token = jwt.sign(
-    {
-      userID: savedUser._id,
-    },
-    process.env.JWT
-  );
-
-  // send the token
+// log a user out
+exports.logout = (req, res) => {
+  // empty/expire the JWT
   res
-    .cookie("token", token, {
+    .cookie("token", "", {
       httpOnly: true,
+      expires: new Date(0),
     })
     .send();
-
-  console.log("");
 };
 
 // Find a single user with an id

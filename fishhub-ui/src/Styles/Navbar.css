@@ -1,13 +1,18 @@
 .navbar {
-  background-color: #00b4cc;
+  background-color: white;
+  height: 5vh;
 }
 
 .sidebar-item {
   margin-left: 2rem;
   font-size: 1.5rem;
-  background-color: #00b4cc;
+  background-color: white;
 }
 
 .sidebar {
-  background-color: #3aafa9;
+  background-color: white;
+}
+
+.welcome {
+  margin: 5%;
 }

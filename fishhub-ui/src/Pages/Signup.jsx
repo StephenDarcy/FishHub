@@ -5,6 +5,9 @@ import Container from "react-bootstrap/Container";
 import { Link, Navigate } from "react-router-dom";
 import UserService from "../Services/UserService";
 import UniversalModal from "../Components/UniversalModal";
+import "../Styles/Signup.css";
+import { AiOutlineMail, AiOutlineLock, AiOutlineUserAdd } from "react-icons/ai";
+import InputGroup from "react-bootstrap/InputGroup";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -72,62 +75,80 @@ export default function Signup() {
 
   return (
     <Container fluid>
-      <h1>Signup for an account</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="Enter email"
-          />
-          <Form.Text className="text-muted">
-            We&apos;ll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+      <Container fluid className="signup-box">
+        <h1>Create Account</h1>
+        <h6>Join the FishHub community</h6>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <InputGroup>
+              <InputGroup.Text>
+                <AiOutlineMail />
+              </InputGroup.Text>
+              <Form.Control
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Email Address"
+              />
+            </InputGroup>
+            <Form.Text className="text-muted">
+              We&apos;ll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            placeholder="Enter username"
-          />
-          <Form.Text className="text-muted">
-            The username can only contain alphanumeric characters and
-            underscores
-          </Form.Text>
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicUsername">
+            <InputGroup>
+              <InputGroup.Text>
+                <AiOutlineUserAdd />
+              </InputGroup.Text>
+              <Form.Control
+                onChange={(e) => setUsername(e.target.value)}
+                type="text"
+                placeholder="Username"
+              />
+            </InputGroup>
+            <Form.Text className="text-muted">
+              The username can only contain alphanumeric characters and
+              underscores
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <InputGroup>
+              <InputGroup.Text>
+                <AiOutlineLock />
+              </InputGroup.Text>
+              <Form.Control
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Password"
+              />
+            </InputGroup>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-          <Form.Label>Confirm password</Form.Label>
-          <Form.Control
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            type="password"
-            placeholder="Confirm password"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Remember me" />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+            <InputGroup>
+              <InputGroup.Text>
+                <AiOutlineLock />
+              </InputGroup.Text>
+              <Form.Control
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password"
+                placeholder="Confirm password"
+              />
+            </InputGroup>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Remember me" />
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      <h2>Already have an account?</h2>
-      <Link to="/login">
-        <h3>Click here to login!</h3>
-      </Link>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        <Link to="/login" className="login-link">
+          <h6>Already have an account? Login here</h6>
+        </Link>
+      </Container>
     </Container>
   );
 }

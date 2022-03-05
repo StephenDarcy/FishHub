@@ -1,6 +1,6 @@
 import axios from "axios";
 export default axios.create({
-  baseURL: process.env.REACT_APP_API_RFISHBASE_URL,
+  baseURL: "http://127.0.0.1:7000/r/",
   headers: {
     "Content-type": "application/json",
   },

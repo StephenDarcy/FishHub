@@ -1,15 +1,61 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import "../Styles/Search.css";
 import { FaSearch } from "react-icons/fa";
 import FishService from "../Services/FishService";
+import SearchResult from "./SearchResult";
 
 function Search() {
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
   const [fish, setFish] = useState("");
   const [search, setSearch] = useState("");
+
+  const sampleData = [
+    {
+      Species: "Symphysodon aequifasciatus",
+      ComName: "Blue discus",
+      Language: "English",
+      SpecCode: 11185,
+    },
+    {
+      Species: "Symphysodon aequifasciatus",
+      ComName: "Brown Discus",
+      Language: "English",
+      SpecCode: 11185,
+    },
+    {
+      Species: "Symphysodon discus",
+      ComName: "Discus",
+      Language: "English",
+      SpecCode: 11186,
+    },
+    {
+      Species: "Paratrygon aiereba",
+      ComName: "Discus ray",
+      Language: "English",
+      SpecCode: 50646,
+    },
+    {
+      Species: "Brachychalcinus orbicularis",
+      ComName: "Discus tetra",
+      Language: "English",
+      SpecCode: 10693,
+    },
+    {
+      Species: "Symphysodon aequifasciatus",
+      ComName: "Green discus",
+      Language: "English",
+      SpecCode: 11185,
+    },
+    {
+      Species: "Symphysodon discus",
+      ComName: "Red discus",
+      Language: "English",
+      SpecCode: 11186,
+    },
+  ];
 
   let handleSearch = async (e) => {
     e.preventDefault();
@@ -20,6 +66,7 @@ function Search() {
         console.log(response.data);
 
         if (response.status === 200) {
+          setData([]);
           setData(response.data);
         } else {
           console.log("Error fetching search result");
@@ -33,11 +80,11 @@ function Search() {
   return (
     <>
       {" "}
-      <Container fluid style={{ display: "flex", justifyContent: "center" }}>
+      <Container fluid>
         <Row>
           <form onSubmit={handleSearch}>
-            <div className="wrap">
-              <div className="search">
+            <div>
+              <div className="search-bar">
                 <input
                   className="searchBox"
                   type="text"
@@ -56,16 +103,16 @@ function Search() {
           </form>
         </Row>
         <Row>
-          {" "}
-          <ul className="results-list">
-            {data.map((species) => (
-              <li className="results-item" key={species.SpecCode}>
-                <Card>
-                  <Card.Body>{species.ComName}</Card.Body>
-                </Card>
-              </li>
+          <Container fluid className="results-box">
+            <h1>Your search returned several results</h1>
+            {sampleData.map((species) => (
+              <SearchResult
+                key={species.SpecCode}
+                Species={species.Species}
+                ComName={species.ComName}
+              />
             ))}
-          </ul>
+          </Container>
         </Row>
       </Container>
     </>

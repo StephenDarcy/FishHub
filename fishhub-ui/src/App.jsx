@@ -24,7 +24,10 @@ function App() {
           <Route path="/c02" element={<AquariumC02 />} />
           <Route path="/size" element={<AquariumSize />} />
           <Route path="/forums" element={<Forums />} />
-          <Route path="/species-profile" element={<SpeciesProfile />} />
+          <Route
+            path="/species-profile/:SpecCode"
+            element={<SpeciesProfile />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import React, { useState } from "react";
+import React from "react";
 import "../Styles/Home.css";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
@@ -7,18 +7,16 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import PropTypes from "prop-types";
 import "../Styles/SearchResult.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SearchResult(props) {
-  const [SpeciesCode, setSpeciesCode] = useState();
   const navigate = useNavigate();
 
   const handleProceed = () => {
-    setSpeciesCode(props.key);
-    SpeciesCode &&
-      navigate("/species-profile/:SpeciesCode", {
-        state: { SpeciesCode: SpeciesCode },
-      });
+    console.log(props.SpecCode);
+    navigate("../species-profile/", {
+      state: { SpeciesCode: props.SpecCode },
+    });
   };
 
   return (
@@ -30,9 +28,11 @@ function SearchResult(props) {
           Scientific Name: {props.Species}
         </CardContent>
         <CardActions>
-          <Button variant="text" onClick={handleProceed}>
-            See More
-          </Button>
+          <Link to={`/species-profile/${props.SpecCode}`}>
+            <Button variant="text" onClick={handleProceed}>
+              See More
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Container>
@@ -43,5 +43,5 @@ export default SearchResult;
 SearchResult.propTypes = {
   ComName: PropTypes.string,
   Species: PropTypes.string,
-  key: PropTypes.number,
+  SpecCode: PropTypes.number,
 };

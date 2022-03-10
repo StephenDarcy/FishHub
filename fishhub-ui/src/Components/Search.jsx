@@ -107,9 +107,8 @@ function Search() {
             <h1>Your search returned several results</h1>
             {sampleData.map((species) => (
               <SearchResult
-                key={species.SpecCode}
-                Species={species.Species}
-                ComName={species.ComName}
+                key={species.SpecCode + species.ComName + species.Species}
+                {...species}
               />
             ))}
           </Container>

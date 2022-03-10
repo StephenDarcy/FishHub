@@ -7,18 +7,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import PropTypes from "prop-types";
 import "../Styles/SearchResult.css";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SearchResult(props) {
-  const navigate = useNavigate();
-
-  const handleProceed = () => {
-    console.log(props.SpecCode);
-    navigate("../species-profile/", {
-      state: { SpeciesCode: props.SpecCode },
-    });
-  };
-
   return (
     <Container fluid>
       <Card className="result-card" variant="outlined">
@@ -28,10 +19,8 @@ function SearchResult(props) {
           Scientific Name: {props.Species}
         </CardContent>
         <CardActions>
-          <Link to={`/species-profile/${props.SpecCode}`}>
-            <Button variant="text" onClick={handleProceed}>
-              See More
-            </Button>
+          <Link to={`${props.SpecCode}`}>
+            <Button variant="text">See More</Button>
           </Link>
         </CardActions>
       </Card>

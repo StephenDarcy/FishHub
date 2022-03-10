@@ -9,6 +9,7 @@ import AquariumC02 from "./Pages/AquariumC02.jsx";
 import AquariumSize from "./Pages/AquariumSize.jsx";
 import Forums from "./Pages/Forums.jsx";
 import SpeciesProfile from "./Pages/SpeciesProfile.jsx";
+import ErrorPage from "./Pages/ErrorPage.jsx";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
 
@@ -25,11 +26,12 @@ function App() {
           <Route path="/size" element={<AquariumSize />} />
           <Route path="/forums" element={<Forums />} />
           <Route
-            path="/species-profile/:SpecCode"
+            path="/species-profile/:SpeciesCode"
             element={<SpeciesProfile />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </>

@@ -7,16 +7,18 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import PropTypes from "prop-types";
 import "../Styles/SearchResult.css";
-import { generatePath, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchResult(props) {
   const [SpeciesCode, setSpeciesCode] = useState();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleProceed = () => {
     setSpeciesCode(props.key);
     SpeciesCode &&
-      history.push(generatePath("/species-profile/:SpecCode", { SpeciesCode }));
+      navigate("/species-profile/:SpeciesCode", {
+        state: { SpeciesCode: SpeciesCode },
+      });
   };
 
   return (

@@ -3,12 +3,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 export default function SpeciesProfile() {
-  const { SpecCode } = useParams();
+  const { SpeciesCode } = useParams();
 
-  console.log(SpecCode);
+  console.log(SpeciesCode);
   return (
     <div>
-      <h1>Species Profile: {SpecCode}</h1>
+      <h1>Species Profile: {SpeciesCode}</h1>
     </div>
   );
 }

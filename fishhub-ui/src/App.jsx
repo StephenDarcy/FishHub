@@ -25,7 +25,7 @@ function App() {
           <Route path="/c02" element={<AquariumC02 />} />
           <Route path="/size" element={<AquariumSize />} />
           <Route path="/forums" element={<Forums />} />
-          <Route path=":SpeciesCode" element={<SpeciesProfile />} />
+          <Route path=":Species" element={<SpeciesProfile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<ErrorPage />} />

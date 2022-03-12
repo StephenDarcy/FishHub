@@ -8,12 +8,14 @@ import CardContent from "@mui/material/CardContent";
 import PropTypes from "prop-types";
 import "../Styles/SearchResult.css";
 import { Link } from "react-router-dom";
+import FishImage from "./FishImage";
 
 function SearchResult(props) {
   return (
     <Container fluid>
       <Card className="result-card" variant="outlined">
         <CardContent>
+          <FishImage species={props.Species} />
           Common Name: {props.ComName}
           <br />
           Scientific Name: {props.Species}

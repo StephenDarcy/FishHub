@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://rfishbase:8000",
+  "proxy": "http://localhost:80",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.1",

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import FadeLoader from "react-spinners/FadeLoader";
 import http from "../http-image";
-import axios from "axios";
 
 export default function FishImage(props) {
   const [loading, setLoading] = useState(true);
@@ -14,13 +13,8 @@ export default function FishImage(props) {
     "https://en.wikipedia.org/w/api.php?origin=*action=query&titles=Green%20neon%20tetra&prop=pageimages&format=json&pithumbsize=1024";
 
   useEffect(() => {
-    axios
-      .get(imgURL, {
-        proxy: {
-          host: "localhost",
-          port: 80,
-        },
-      })
+    http
+      .get(imgURL)
       .then((response) => {
         console.log(response.status);
         console.log(response.data);

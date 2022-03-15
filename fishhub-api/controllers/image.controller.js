@@ -3,8 +3,12 @@ const fs = require("fs");
 var path = require("path");
 
 exports.find = (req, res) => {
+  const species = req.params.species;
+  console.log(species);
   let imageFile = getImgFile(
-    "https://en.wikipedia.org/w/api.php?action=query&titles=Dublin&prop=pageimages&format=json&pithumbsize=2048"
+    `https://en.wikipedia.org/w/api.php?action=query&titles=` +
+      species +
+      `&prop=pageimages&format=json&pithumbsize=2048`
   );
   imageFile.then(function (result) {
     res.sendFile(path.resolve("images/image.jpg"));

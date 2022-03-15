@@ -5,7 +5,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import http from "../http-image";
 
 export default function FishImage(props) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   const [imgSource, setImgSource] = useState();
 
@@ -25,6 +25,7 @@ export default function FishImage(props) {
           setLoading(false);
         } else {
           console.log("Error fetching fish image");
+          setLoading(false);
         }
       })
       .catch((error) => {
@@ -37,7 +38,7 @@ export default function FishImage(props) {
       {loading ? (
         <FadeLoader color={"#26beff"} size={150} />
       ) : (
-        <img src={imgSource} alt="Fish Image"></img>
+        <img src="http://localhost:6868/api/image/" alt="Fish Image"></img>
       )}
     </>
   );

@@ -25,5 +25,4 @@ yarn-error.log*
 node_modules
 
 .vscode
-/image.jpg
-/image.png
+.jpg

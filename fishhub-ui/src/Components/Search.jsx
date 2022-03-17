@@ -6,23 +6,27 @@ import { FaSearch } from "react-icons/fa";
 import FishService from "../Services/FishService";
 import SearchResult from "./SearchResult";
 import ImageService from "../Services/ImageService";
+import FadeLoader from "react-spinners/FadeLoader";
 
 function Search() {
   const [data, setData] = useState([]);
   const [fish, setFish] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let handleSearch = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     FishService.getScientific(search)
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
 
         if (response.status === 200) {
+          setLoading(false);
+          deleteImages();
           setData([]);
-          setData(response.data);
+          setData(refineData(response.data));
         } else {
           console.log("Error fetching search result");
         }
@@ -63,14 +67,16 @@ function Search() {
         </Row>
         <Row>
           <Container fluid className="results-box">
-            <h1>Your search returned several results</h1>
-            {data.map((species) => (
-              <SearchResult
-                key={species.SpecCode + species.ComName + species.Species}
-                {...species}
-              />
-            ))}
-            {deleteImages()}
+            {loading ? (
+              <FadeLoader size={500} />
+            ) : (
+              data.map((species) => (
+                <SearchResult
+                  key={species.SpecCode + species.ComName + species.Species}
+                  {...species}
+                />
+              ))
+            )}
           </Container>
         </Row>
       </Container>
@@ -78,3 +84,8 @@ function Search() {
   );
 }
 export default Search;
+
+const refineData = (data) => {
+  console.log(data);
+  return data;
+};

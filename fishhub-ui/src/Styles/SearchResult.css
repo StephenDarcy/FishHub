@@ -1,3 +1,9 @@
 .result-card {
   width: 33%;
 }
+
+.search-image {
+  border: 1px solid black;
+  width: 50%;
+  height: 140px;
+}

@@ -13,13 +13,13 @@ exports.find = (req, res) => {
     species
   );
 
-  if (!imageFile) {
-    res.send("Could not find image");
+  try {
+    imageFile.then(function () {
+      res.sendFile(path.resolve(`images/` + species + `.jpg`));
+    });
+  } catch (error) {
+    res.status(400).json("Error: could not get image " + error);
   }
-
-  imageFile.then(function (result) {
-    res.sendFile(path.resolve(`images/` + species + `.jpg`));
-  });
 };
 
 exports.delete = async (req, res) => {

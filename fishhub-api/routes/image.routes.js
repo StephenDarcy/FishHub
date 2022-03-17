@@ -4,5 +4,7 @@ module.exports = (app) => {
 
   router.get("/:species", image.find);
 
+  router.delete("/delete", image.delete);
+
   app.use("/api/image", router);
 };

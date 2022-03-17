@@ -5,6 +5,7 @@ import "../Styles/Search.css";
 import { FaSearch } from "react-icons/fa";
 import FishService from "../Services/FishService";
 import SearchResult from "./SearchResult";
+import ImageService from "../Services/ImageService";
 
 function Search() {
   const [data, setData] = useState([]);
@@ -29,6 +30,10 @@ function Search() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const deleteImages = () => {
+    ImageService.deleteAll();
   };
 
   return (
@@ -65,6 +70,7 @@ function Search() {
                 {...species}
               />
             ))}
+            {deleteImages()}
           </Container>
         </Row>
       </Container>

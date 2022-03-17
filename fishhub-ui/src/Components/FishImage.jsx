@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import FadeLoader from "react-spinners/FadeLoader";
-import ImageService from "../Services/ImageService";
 
 export default function FishImage(props) {
   const [loading, setLoading] = useState(false);

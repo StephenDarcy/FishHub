@@ -1,6 +1,7 @@
 const axios = require("axios");
 const fs = require("fs");
 var path = require("path");
+var path = require("path");
 
 exports.find = (req, res) => {
   const species = req.params.species;
@@ -12,18 +13,31 @@ exports.find = (req, res) => {
     species
   );
 
+  if (!imageFile) {
+    res.send("Could not find image");
+  }
+
   imageFile.then(function (result) {
-    res.sendFile(path.resolve("images/image.jpg"));
+    res.sendFile(path.resolve(`images/` + species + `.jpg`));
   });
 };
 
-async function getOtherImage(pageURL) {
-  const imgPath = "./images/image.jpg";
+exports.delete = async (req, res) => {
+  dir = "/fishhub-api/images";
+  try {
+    removeDir(dir);
+    res.status(200).json("Images Deleted");
+  } catch (error) {
+    res.status(400).json("Error: " + error);
+  }
+};
+
+async function getOtherImage(pageURL, species) {
+  const imgPath = `./images/` + species + `.jpg`;
   try {
     const { data: response } = await axios.get(pageURL);
 
     var item_id = Object.keys(response.query.pages)[0];
-    console.log(response.query.pages[item_id].thumbnail.source);
     return JSON.stringify(response.query.pages[item_id].thumbnail.source);
   } catch (error) {
     console.log(error);
@@ -32,7 +46,7 @@ async function getOtherImage(pageURL) {
 
 async function getImgFile(pageURL, species) {
   var imgSource;
-  const imgPath = "./images/image.jpg";
+  const imgPath = `./images/` + species + `.jpg`;
   try {
     const { data: response } = await axios.get(pageURL);
     var item_id = Object.keys(response.query.pages)[0];
@@ -46,10 +60,12 @@ async function getImgFile(pageURL, species) {
     irects=&format=json&generator=search&gsrsearch=intitle:` +
         species +
         `&gsrlimi
-    t=20`
+    t=20`,
+      species
     );
-  } finally {
-    console.log(imgSource);
+  }
+
+  if (imgSource) {
     let url = imgSource.replace(/['"]+/g, "");
     const response = await axios({
       url,
@@ -62,5 +78,23 @@ async function getImgFile(pageURL, species) {
         .on("error", reject)
         .once("close", () => resolve(imgPath));
     });
+  } else {
+    return false;
   }
 }
+
+var removeDir = function (dirPath) {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach((file, index) => {
+      const curPath = path.join(directoryPath, file);
+      if (fs.lstatSync(curPath).isDirectory()) {
+        // recurse
+        deleteFolderRecursive(curPath);
+      } else {
+        // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(directoryPath);
+  }
+};

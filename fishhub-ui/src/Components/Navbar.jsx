@@ -8,7 +8,8 @@ import BootstrapNavbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "../Styles/Navbar.css";
-import logo from "../Images/logo-transparent.png";
+import logo from "../Images/logo-transparent-blue.png";
+import logoWhite from "../Images/logo-transparent-white.png";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -18,26 +19,33 @@ function Navbar() {
     <>
       <BootstrapNavbar className="navbar">
         <Container fluid>
-          <MenuIcon onClick={handleShow} size="30" />
+          <MenuIcon className="icon" onClick={handleShow} size="30" />
           <BootstrapNavbar.Brand>
             <Link to="/">
               <img src={logo} alt="FishHub" className="logo" />
             </Link>
           </BootstrapNavbar.Brand>
           <Link to="/login">
-            <AccountIcon size="30" />
+            <AccountIcon className="icon" size="30" />
           </Link>
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>
-              <CloseIcon className="icon" size="30" onClick={handleClose} />
+              <CloseIcon
+                className="icon-close"
+                size="30"
+                onClick={handleClose}
+              />
             </Offcanvas.Header>
             <Offcanvas.Body>
+              <Link to="/" onClick={handleClose}>
+                <img src={logoWhite} alt="FishHub" className="sidebar-logo" />
+              </Link>
               {SidebarItems.map((item, index) => {
                 return (
                   <li key={index} className={item.class}>
                     <Link to={item.path}>
                       {item.icon}
-                      <span>{item.sidebarItem}</span>
+                      <span className="icon-span">{item.sidebarItem}</span>
                     </Link>
                   </li>
                 );

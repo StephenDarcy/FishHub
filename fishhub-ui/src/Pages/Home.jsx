@@ -10,7 +10,6 @@ function Home() {
       <Row>
         <Search />
       </Row>
-      <Row></Row>
     </Container>
   );
 }

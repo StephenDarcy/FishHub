@@ -2,13 +2,33 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import "../Styles/Search.css";
-import { FaSearch } from "react-icons/fa";
 import FishService from "../Services/FishService";
 import SearchResult from "./SearchResult";
 import ImageService from "../Services/ImageService";
 import FadeLoader from "react-spinners/FadeLoader";
+import Button from "react-bootstrap/Button";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import { HiSearch as SearchIcon } from "react-icons/hi";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  root: {
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      border: "none",
+    },
+  },
+});
 
 function Search() {
+  const classes = useStyles();
+
   const [data, setData] = useState([]);
   const [fish, setFish] = useState("");
   const [search, setSearch] = useState("");
@@ -44,24 +64,49 @@ function Search() {
     <>
       {" "}
       <Container fluid>
-        <Row>
+        <Row className="search-row">
           <form onSubmit={handleSearch}>
             <div>
-              <div className="search-bar">
-                <input
-                  className="searchBox"
+              <Row className="input-row">
+                <TextField
+                  className={classes.root}
                   type="text"
                   onChange={(e) => setFish(e.target.value)}
                   placeholder="Search here for a fish"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment>
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                    classes: {
+                      root: {
+                        border: "3px solid #77a6f7",
+                      },
+                    },
+                  }}
+                  sx={{
+                    width: "60%",
+                    border: "3px solid #77a6f7",
+                    height: "5vh",
+                    borderRadius: "20px",
+                    outline: "none",
+                    backgroundColor: "white",
+                  }}
                 />
-                <button
+              </Row>
+              <Row className="btn-row">
+                <Button
+                  className="search-btn"
                   type="submit"
-                  className="searchButton"
                   onClick={() => setSearch(fish)}
                 >
-                  <FaSearch />
-                </button>
-              </div>
+                  Normal Search
+                </Button>
+                <Button className="search-btn" type="submit">
+                  Scientific Search
+                </Button>
+              </Row>
             </div>
           </form>
         </Row>

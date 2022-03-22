@@ -28,7 +28,7 @@ export const SidebarData = [
     icon: <SearchIcon />,
   },
   {
-    sidebarItem: "Aquarium C02 Calculator",
+    sidebarItem: "Dissolved C02 Calculator",
     path: "/c02",
     class: "sidebar-item",
     icon: <C02Icon />,

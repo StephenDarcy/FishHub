@@ -20,14 +20,12 @@
 }
 
 .btn {
-  background-color: #26beff;
+  background-color: #77a6f7;
   border: 0px;
-  height: 5vh;
-  width: 100% !important;
 }
 
 .btn:hover {
-  background-color: #26beff;
+  background-color: #77a6f7;
 }
 
 .signup-link {

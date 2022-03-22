@@ -10,9 +10,7 @@ function Home() {
       <Row>
         <Search />
       </Row>
-      <Row>
-        <div className="footer"></div>
-      </Row>
+      <Row></Row>
     </Container>
   );
 }

@@ -6,13 +6,14 @@
 .sidebar-item {
   margin-left: 2rem;
   font-size: 1.5rem;
-  background-color: white;
+  background: none;
 }
 
 .sidebar {
   background-color: white;
+  width: 30vw;
 }
 
-.welcome {
-  margin: 5%;
+.logo {
+  height: 3vh;
 }

@@ -8,6 +8,7 @@ import BootstrapNavbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "../Styles/Navbar.css";
+import logo from "../Images/logo-transparent.png";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -17,14 +18,18 @@ function Navbar() {
     <>
       <BootstrapNavbar className="navbar">
         <Container fluid>
-          <MenuIcon onClick={handleShow} />
-          <BootstrapNavbar.Brand href="">FishHub</BootstrapNavbar.Brand>
+          <MenuIcon onClick={handleShow} size="30" />
+          <BootstrapNavbar.Brand>
+            <Link to="/">
+              <img src={logo} alt="FishHub" className="logo" />
+            </Link>
+          </BootstrapNavbar.Brand>
           <Link to="/login">
-            <AccountIcon />
+            <AccountIcon size="30" />
           </Link>
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>
-              <CloseIcon onClick={handleClose} />
+              <CloseIcon className="icon" size="30" onClick={handleClose} />
             </Offcanvas.Header>
             <Offcanvas.Body>
               {SidebarItems.map((item, index) => {

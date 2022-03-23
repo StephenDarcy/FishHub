@@ -95,6 +95,7 @@ function Search() {
                   }}
                 />
               </Row>
+
               <Row className="btn-row">
                 <Button
                   className="search-btn"

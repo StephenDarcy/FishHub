@@ -12,6 +12,9 @@ import SpeciesProfile from "./Pages/SpeciesProfile.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

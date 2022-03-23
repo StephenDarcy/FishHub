@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import "../Styles/Login.css";
+// eslint-disable-next-line no-unused-vars
 import UserService from "../Services/UserService";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 
@@ -23,7 +24,14 @@ export default function Login() {
       password: password,
     };
 
-    UserService.login(data)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/users/login/`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    })
       .then((response) => {
         console.log(response.status);
         console.log(response.data);

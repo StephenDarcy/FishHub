@@ -24,7 +24,7 @@ services:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     volumes:
       - /fishhub-api/node_modules
-      - api:/fishhub-api
+      - ./fishhub-api:/fishhub-api
     environment:
       - DB_HOST=mongodb
       - DB_USER=$MONGODB_USER
@@ -50,9 +50,6 @@ services:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
     environment:
       - CHOKIDAR_USEPOLLING="true"
-    volumes:
-      - /fishhub-ui/node_modules
-      - ./fishhub-ui:/fishhub-ui
     networks:
       - frontend
 
@@ -65,7 +62,6 @@ services:
       - frontend
 volumes:
   db:
-  api:
 networks:
   backend:
   frontend:

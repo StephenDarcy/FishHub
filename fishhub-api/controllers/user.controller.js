@@ -66,6 +66,8 @@ exports.create = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
       })
       .send();
   } catch (err) {
@@ -112,11 +114,13 @@ exports.login = async (req, res) => {
       },
       process.env.JWT
     );
-
+    console.log("Login request received");
     // send the token
     res
       .cookie("token", token, {
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
       })
       .send();
   } catch (err) {

@@ -10,6 +10,8 @@ module.exports = (app) => {
 
   router.get("/", users.findAll);
 
+  router.get("/loggedIn", users.loggedIn);
+
   router.get("/:id", users.findOne);
 
   router.delete("/:id", users.delete);

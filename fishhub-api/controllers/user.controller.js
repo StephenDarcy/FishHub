@@ -2,6 +2,7 @@ const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { route } = require("express/lib/router");
 
 // getting all users
 exports.findAll = (req, res) => {
@@ -80,13 +81,13 @@ exports.create = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     // Validate request
-    if (!req.body.email || !req.body.password) {
+    if (!req.body[0].email || !req.body[0].password) {
       res.status(400).send({ message: "Password/email can not be empty!" });
       return;
     }
 
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body[0].email;
+    const password = req.body[0].password;
 
     // validating user exists
     const existingUser = await User.findOne({ email: email });
@@ -168,4 +169,19 @@ exports.update = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
+};
+
+// endpoint to check if user logged in
+exports.loggedIn = (req, res) => {
+  console.log("Checking if user logged in...");
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.json(false);
+
+    jwt.verify(token, process.env.JWT);
+
+    res.send(true);
+  } catch (error) {
+    res.json(false);
+  }
 };

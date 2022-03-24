@@ -19,18 +19,20 @@ export default function Login() {
 
     console.log(email, password);
 
-    let data = {
-      email: email,
-      password: password,
-    };
+    let data = [
+      {
+        email: email,
+        password: password,
+      },
+    ];
 
     fetch(`${process.env.REACT_APP_API_BASE_URL}/users/login/`, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      data: data,
+      body: data,
     })
       .then((response) => {
         console.log(response.status);

@@ -26,6 +26,10 @@ const logout = () => {
   return http.get("/users/logout/");
 };
 
+const loggedIn = () => {
+  return http.get("/users/loggedIn/");
+};
+
 const UserService = {
   getAll,
   get,
@@ -34,5 +38,6 @@ const UserService = {
   remove,
   login,
   logout,
+  loggedIn,
 };
 export default UserService;

@@ -13,12 +13,13 @@ import ErrorPage from "./Pages/ErrorPage.jsx";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
 import axios from "axios";
+import { Auth } from "./Context/Auth";
 
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <>
+    <Auth>
       <Router>
         <Navbar />
         <Routes>
@@ -34,7 +35,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
-    </>
+    </Auth>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { IoMdClose as CloseIcon } from "react-icons/io";
@@ -10,11 +10,16 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "../Styles/Navbar.css";
 import logo from "../Images/logo-transparent-blue.png";
 import logoWhite from "../Images/logo-transparent-white.png";
+import AuthContext from "../Context/Auth";
 
 function Navbar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const loggedIn = useContext(AuthContext);
+
+  console.log(loggedIn);
+
   return (
     <>
       <BootstrapNavbar className="navbar">
@@ -25,9 +30,18 @@ function Navbar() {
               <img src={logo} alt="FishHub" className="logo" />
             </Link>
           </BootstrapNavbar.Brand>
-          <Link to="/login">
-            <AccountIcon className="icon" size="30" />
-          </Link>
+          {!loggedIn && (
+            <>
+              <Link to="/login">
+                <h2>Login</h2>
+              </Link>
+              <Link to="/signup">
+                <h2>Register</h2>
+              </Link>
+            </>
+          )}
+          {loggedIn && <AccountIcon className="icon" size="30" />}
+
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>
               <CloseIcon

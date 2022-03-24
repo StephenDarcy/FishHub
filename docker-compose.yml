@@ -23,7 +23,6 @@ services:
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     volumes:
-      - /fishhub-api/node_modules
       - ./fishhub-api:/fishhub-api
     environment:
       - DB_HOST=mongodb

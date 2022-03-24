@@ -16,9 +16,7 @@ function Navbar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const loggedIn = useContext(AuthContext);
-
-  console.log(loggedIn);
+  const { loggedIn } = useContext(AuthContext);
 
   return (
     <>
@@ -30,7 +28,7 @@ function Navbar() {
               <img src={logo} alt="FishHub" className="logo" />
             </Link>
           </BootstrapNavbar.Brand>
-          {!loggedIn && (
+          {loggedIn === false && (
             <>
               <Link to="/login">
                 <h2>Login</h2>
@@ -40,7 +38,7 @@ function Navbar() {
               </Link>
             </>
           )}
-          {loggedIn && <AccountIcon className="icon" size="30" />}
+          {loggedIn === true && <AccountIcon className="icon" size="30" />}
 
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>

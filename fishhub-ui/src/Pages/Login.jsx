@@ -9,34 +9,36 @@ import "../Styles/Login.css";
 // eslint-disable-next-line no-unused-vars
 import UserService from "../Services/UserService";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  function handleCookie() {
+    setCookie("token", token, {
+      path: "/",
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleCookie();
 
     console.log(email, password);
 
-    let data = [
-      {
-        email: email,
-        password: password,
-      },
-    ];
+    let data = {
+      email: email,
+      password: password,
+    };
 
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/users/login/`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: data,
-    })
+    UserService.login(data)
       .then((response) => {
+        setToken(response.data);
+        console.log(cookies.token);
         console.log(response.status);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -56,7 +58,7 @@ export default function Login() {
               <h6>Login to your account</h6>
             </Row>
 
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <Row className="form-row">
                 <Form.Group
                   onChange={(e) => setEmail(e.target.value)}
@@ -98,7 +100,7 @@ export default function Login() {
               </Row>
 
               <Row>
-                <Button type="submit">Log In</Button>
+                <Button onClick={handleSubmit}>Log In</Button>
               </Row>
             </Form>
 

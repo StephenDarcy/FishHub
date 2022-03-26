@@ -64,14 +64,9 @@ exports.create = async (req, res) => {
     );
 
     // send the token
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-      })
-      .send();
+    res.send(JSON.stringify(token));
   } catch (err) {
+    console.log("Signup failed");
     console.log(err);
     res.status(500).send();
   }
@@ -79,15 +74,17 @@ exports.create = async (req, res) => {
 
 // user login
 exports.login = async (req, res) => {
+  console.log("Attempting to login..");
+  console.log(req.body);
   try {
     // Validate request
-    if (!req.body[0].email || !req.body[0].password) {
+    if (!req.body.email || !req.body.password) {
       res.status(400).send({ message: "Password/email can not be empty!" });
       return;
     }
 
-    const email = req.body[0].email;
-    const password = req.body[0].password;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // validating user exists
     const existingUser = await User.findOne({ email: email });
@@ -115,15 +112,9 @@ exports.login = async (req, res) => {
       },
       process.env.JWT
     );
-    console.log("Login request received");
+    console.log("Login success, token sending...");
     // send the token
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-      })
-      .send();
+    res.send(JSON.stringify(token));
   } catch (err) {
     console.log(err);
     res.status(500).send();

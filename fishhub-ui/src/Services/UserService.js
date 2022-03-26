@@ -15,12 +15,7 @@ const remove = (id) => {
   return http.delete(`/users/${id}`);
 };
 const login = (data) => {
-  return http.post("/users/login/", data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  });
+  return http.post("/users/login/", data);
 };
 const logout = () => {
   return http.get("/users/logout/");

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import UserProfile from "../Pages/UserProfile";
-import LogOut from "./LogOut";
 import Navbar from "./Navbar.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../Pages/Home.jsx";
@@ -35,7 +34,6 @@ export default function WebsiteRoutes() {
         {loggedIn === true && (
           <>
             <Route path="/profile/:id" element={<UserProfile />} />
-            <LogOut />
           </>
         )}
         <Route exact path="/" element={<Home />} />

@@ -1,11 +1,12 @@
 const express = require("express");
 var cors = require("cors");
+var cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
 const app = express();
-
+app.use(cookieParser());
 var corsOptions = {
   origin: /* process.env.CLIENT_ORIGIN || */ "http://localhost:8888",
   methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],

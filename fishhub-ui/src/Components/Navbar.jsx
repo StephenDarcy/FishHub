@@ -11,6 +11,7 @@ import "../Styles/Navbar.css";
 import logo from "../Images/logo-transparent-blue.png";
 import logoWhite from "../Images/logo-transparent-white.png";
 import AuthContext from "../Context/Auth";
+import LogOut from "./LogOut";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -38,7 +39,12 @@ function Navbar() {
               </Link>
             </>
           )}
-          {loggedIn === true && <AccountIcon className="icon" size="30" />}
+          {loggedIn === true && (
+            <>
+              <LogOut />
+              <AccountIcon className="icon" size="30" />
+            </>
+          )}
 
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>

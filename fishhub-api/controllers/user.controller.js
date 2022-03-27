@@ -2,7 +2,6 @@ const db = require("../models");
 const User = db.users;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { route } = require("express/lib/router");
 
 // getting all users
 exports.findAll = (req, res) => {

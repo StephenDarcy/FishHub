@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -8,6 +8,8 @@ import UniversalModal from "../Components/UniversalModal";
 import "../Styles/Signup.css";
 import { AiOutlineMail, AiOutlineLock, AiOutlineUserAdd } from "react-icons/ai";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useCookies } from "react-cookie";
+import AuthContext from "../Context/Auth";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -15,8 +17,16 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [signedUp, setSignedUp] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [redirect, setRedirect] = useState(false);
+  const [token, setToken] = useState("");
+  const [cookies, setCookie] = useCookies(["token"]);
+  const { getLoggedIn } = useContext(AuthContext);
+
+  function handleCookie() {
+    setCookie("token", token, {
+      path: "/",
+    });
+  }
 
   const verifyPassword = (firstPassword, secondPassword) => {
     return firstPassword == secondPassword;
@@ -43,9 +53,11 @@ export default function Signup() {
 
       UserService.create(data)
         .then((response) => {
-          console.log(response.status);
-          console.log(response.data);
+          setToken(response.data);
+          handleCookie();
+          getLoggedIn();
           setSignedUp(true);
+          console.log(cookies.token);
         })
         .catch((error) => {
           console.error(error);

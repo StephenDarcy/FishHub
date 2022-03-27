@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -6,16 +6,19 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import "../Styles/Login.css";
-// eslint-disable-next-line no-unused-vars
 import UserService from "../Services/UserService";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { useCookies } from "react-cookie";
+import AuthContext from "../Context/Auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [cookies, setCookie] = useCookies(["token"]);
+  const { getLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleCookie() {
     setCookie("token", token, {
@@ -25,9 +28,6 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCookie();
-
-    console.log(email, password);
 
     let data = {
       email: email,
@@ -37,8 +37,10 @@ export default function Login() {
     UserService.login(data)
       .then((response) => {
         setToken(response.data);
+        handleCookie();
+        getLoggedIn();
         console.log(cookies.token);
-        console.log(response.status);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);

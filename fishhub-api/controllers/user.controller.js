@@ -63,7 +63,14 @@ exports.create = async (req, res) => {
     );
 
     // send the token
-    res.send(JSON.stringify(token));
+    res
+      .cookie("token", token, {
+        sameSite: "none",
+        secure: true,
+        httpOnly: true,
+      })
+      .send();
+    //res.send(JSON.stringify(token));
   } catch (err) {
     console.log("Signup failed");
     console.log(err);
@@ -113,7 +120,14 @@ exports.login = async (req, res) => {
     );
     console.log("Login success, token sending...");
     // send the token
-    res.send(JSON.stringify(token));
+    res
+      .cookie("token", token, {
+        sameSite: "none",
+        secure: true,
+        httpOnly: true,
+      })
+      .send();
+    //res.send(JSON.stringify(token));
   } catch (err) {
     console.log(err);
     res.status(500).send();
@@ -125,6 +139,8 @@ exports.logout = (req, res) => {
   // empty/expire the JWT
   res
     .cookie("token", "", {
+      sameSite: "none",
+      secure: true,
       httpOnly: true,
       expires: new Date(0),
     })

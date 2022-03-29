@@ -2,9 +2,8 @@ import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserService from "../Services/UserService";
-import UniversalModal from "../Components/UniversalModal";
 import "../Styles/Signup.css";
 import { AiOutlineMail, AiOutlineLock, AiOutlineUserAdd } from "react-icons/ai";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -16,11 +15,10 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [signedUp, setSignedUp] = useState(false);
-  const [redirect, setRedirect] = useState(false);
   const [token, setToken] = useState("");
   const [cookies, setCookie] = useCookies(["token"]);
   const { getLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleCookie() {
     setCookie("token", token, {
@@ -30,13 +28,6 @@ export default function Signup() {
 
   const verifyPassword = (firstPassword, secondPassword) => {
     return firstPassword == secondPassword;
-  };
-
-  const startNavigate = () => {
-    setTimeout(() => {
-      setRedirect(true);
-      console.log("redirecting to login page");
-    }, 2000);
   };
 
   const handleSubmit = (e) => {
@@ -56,8 +47,8 @@ export default function Signup() {
           setToken(response.data);
           handleCookie();
           getLoggedIn();
-          setSignedUp(true);
           console.log(cookies.token);
+          navigate("/");
         })
         .catch((error) => {
           console.error(error);
@@ -66,24 +57,6 @@ export default function Signup() {
       console.log("Passwords do not match");
     }
   };
-
-  if (signedUp) {
-    startNavigate();
-
-    if (redirect) {
-      return <Navigate to="/login" />;
-    }
-
-    return (
-      <>
-        <UniversalModal
-          show={true}
-          title="Account successfully created!"
-          body="You will now be redirected to sign in"
-        />
-      </>
-    );
-  }
 
   return (
     <Container fluid>

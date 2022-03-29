@@ -1,6 +1,6 @@
 #* @filter cors
 cors <- function(res) {
-    res$setHeader("Access-Control-Allow-Origin", "*")
+    res$setHeader("Access-Control-Allow-Origin", "http://localhost:8888")
     plumber::forward()
 }
 

@@ -133,5 +133,21 @@ export default Search;
 
 const refineData = (data) => {
   console.log(data);
-  return data;
+  let refinedData = [];
+  let speciesCodes = [];
+  data.forEach((species) => {
+    if (speciesCodes.includes(species.SpecCode)) {
+      // refining duplicate species
+      let index = refinedData.findIndex(
+        (obj) => obj.SpecCode == species.SpecCode
+      );
+
+      refinedData[index].ComName += ", " + species.ComName;
+    } else {
+      speciesCodes.push(species.SpecCode);
+      refinedData.push(species);
+    }
+  });
+  console.log(speciesCodes);
+  return refinedData;
 };

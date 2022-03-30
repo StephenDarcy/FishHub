@@ -1,7 +1,6 @@
 const axios = require("axios");
 const fs = require("fs");
 var path = require("path");
-var path = require("path");
 
 exports.find = (req, res) => {
   const species = req.params.species;

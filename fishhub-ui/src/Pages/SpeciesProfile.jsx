@@ -25,7 +25,7 @@ export default function SpeciesProfile() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [Species]);
 
   console.log(Species);
   return (

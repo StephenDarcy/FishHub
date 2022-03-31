@@ -18,26 +18,41 @@
 }
 
 .search-row {
-  height: 80vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .input-row {
+  width: 80vw;
   display: flex;
   justify-content: center;
 }
 
 .btn-row {
-  padding-top: 1.5%;
   display: flex;
   justify-content: center;
 }
 
+.btn-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search-btn {
-  margin-right: 2%;
-  margin-left: 2%;
-  width: 20%;
-  height: 60%;
+  border-radius: 15px;
+  margin-top: 4vh;
+  width: 60%;
+  height: 50%;
+}
+
+.search-btn:hover {
+  box-shadow: 1px 1px 1px #696969;
+}
+
+.search-logo {
+  width: 60%;
+  margin-bottom: 10%;
 }

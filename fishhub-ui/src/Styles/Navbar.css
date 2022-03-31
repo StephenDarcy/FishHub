@@ -1,12 +1,12 @@
 .navbar {
   background-color: white;
   border-bottom: 0.2rem solid #77a6f7;
-  height: 5vh;
+  height: 10%;
 }
 
 .sidebar-item {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   background: none;
   list-style: none;
@@ -50,10 +50,6 @@
 
 .logo {
   height: 3vh;
-}
-
-.logo:hover {
-  height: 3.2vh;
 }
 
 .sidebar-logo {

@@ -7,7 +7,6 @@
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
-  font-size: 20px;
 }
 
 .results-box {
@@ -17,22 +16,30 @@
   border: 1px black;
 }
 
-.search-row {
+.search-container {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
 }
 
-.input-row {
-  width: 80vw;
-  display: flex;
-  justify-content: center;
+.fishhub-search {
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+  width: 100%;
+  text-align: center;
 }
 
-.btn-row {
-  display: flex;
-  justify-content: center;
+.logo-main-text {
+  color: white;
+  font-size: 6em;
+  text-shadow: 2px 2px 2px #696969;
+  font-weight: 300;
+}
+
+.logo-sub-text {
+  color: white;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 2px #696969;
+  font-style: italic;
 }
 
 .btn-col {
@@ -52,7 +59,39 @@
   box-shadow: 1px 1px 1px #696969;
 }
 
-.search-logo {
-  width: 60%;
-  margin-bottom: 10%;
+.logo-icon {
+  filter: drop-shadow(2px 2px 2px #696969);
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 1200px) {
+  .logo-main-text {
+    font-size: 4em;
+  }
+
+  .logo-sub-text {
+    font-size: 2em;
+  }
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 780px) {
+  .logo-main-text {
+    font-size: 2.5em;
+  }
+
+  .logo-sub-text {
+    font-size: 1em;
+  }
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 400px) {
+  .logo-main-text {
+    font-size: 1.5em;
+  }
+
+  .logo-sub-text {
+    font-size: 1em;
+  }
 }

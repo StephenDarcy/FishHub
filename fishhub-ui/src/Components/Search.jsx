@@ -10,10 +10,10 @@ import FadeLoader from "react-spinners/FadeLoader";
 import Button from "react-bootstrap/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import { HiSearch as SearchIcon } from "react-icons/hi";
+import { VscSearch as SearchIcon } from "react-icons/vsc";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import searchLogo from "../Images/search-transparent-white.png";
+import { IconContext } from "react-icons";
 
 const useStyles = makeStyles({
   root: {
@@ -69,13 +69,25 @@ function Search() {
     ImageService.deleteAll();
   };
 
+  const returnToSearch = () => {
+    setPageState("searching");
+  };
+
   return (
     <>
       {pageState === "searching" && (
-        <Container className="search-row">
+        <Container className="search-container">
+          <Row className="fishhub-search">
+            <h1 className="logo-main-text">
+              fishhub search{" "}
+              <IconContext.Provider value={{ className: "logo-icon" }}>
+                <SearchIcon style={{ textShadow: "1px 1px 1px #696969" }} />
+              </IconContext.Provider>
+            </h1>
+            <h2 className="logo-sub-text">browse over 34800 species of fish</h2>
+          </Row>
           <form onSubmit={handleSearch}>
-            <Row className="input-row">
-              <img src={searchLogo} alt="FishHub" className="search-logo" />
+            <Row>
               <TextField
                 className={classes.root}
                 type="text"
@@ -104,7 +116,7 @@ function Search() {
               />
             </Row>
 
-            <Row className="btn-row">
+            <Row>
               <Col className="btn-col">
                 <Button
                   className="search-btn"
@@ -125,6 +137,8 @@ function Search() {
       )}
       {pageState === "results" && (
         <Container className="results-page">
+          <h1>Your search returned several results</h1>
+          <Button onClick={returnToSearch}>Return to search page</Button>
           {loading ? (
             <FadeLoader size={500} />
           ) : (

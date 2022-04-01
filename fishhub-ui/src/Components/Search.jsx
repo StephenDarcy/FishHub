@@ -14,6 +14,7 @@ import { VscSearch as SearchIcon } from "react-icons/vsc";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 const useStyles = makeStyles({
   root: {
@@ -49,9 +50,9 @@ function Search() {
 
         if (response.status === 200) {
           setLoading(false);
-          deleteImages();
           setData([]);
           setData(refineData(response.data));
+          deleteImages();
           //if only one result redirect
           if (response.data.length == 1) {
             navigate("/" + response.data[0].Species);
@@ -84,7 +85,9 @@ function Search() {
                 <SearchIcon style={{ textShadow: "1px 1px 1px #696969" }} />
               </IconContext.Provider>
             </h1>
-            <h2 className="logo-sub-text">browse over 34800 species of fish</h2>
+            <h2 className="logo-sub-text">
+              browse over 34,800 species of fish
+            </h2>
           </Row>
           <form onSubmit={handleSearch}>
             <Row>
@@ -139,16 +142,18 @@ function Search() {
         <Container className="results-page">
           <h1>Your search returned several results</h1>
           <Button onClick={returnToSearch}>Return to search page</Button>
-          {loading ? (
-            <FadeLoader size={500} />
-          ) : (
-            data.map((species) => (
-              <SearchResult
-                key={species.SpecCode + species.ComName + species.Species}
-                {...species}
-              />
-            ))
-          )}
+          <Scrollbars style={{ height: "80%" }}>
+            {loading ? (
+              <FadeLoader size={500} />
+            ) : (
+              data.map((species) => (
+                <SearchResult
+                  key={species.SpecCode + species.ComName + species.Species}
+                  {...species}
+                />
+              ))
+            )}
+          </Scrollbars>
         </Container>
       )}
     </>

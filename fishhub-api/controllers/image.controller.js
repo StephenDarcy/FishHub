@@ -31,8 +31,7 @@ exports.delete = async (req, res) => {
   }
 };
 
-async function getOtherImage(pageURL, species) {
-  const imgPath = `./images/` + species + `.jpg`;
+async function getOtherImage(pageURL) {
   try {
     const { data: response } = await axios.get(pageURL);
 
@@ -59,8 +58,7 @@ async function getImgFile(pageURL, species) {
     irects=&format=json&generator=search&gsrsearch=intitle:` +
         species +
         `&gsrlimi
-    t=20`,
-      species
+    t=20`
     );
   }
 
@@ -82,7 +80,7 @@ async function getImgFile(pageURL, species) {
   }
 }
 
-var removeDir = function (dirPath) {
+var removeDir = function (directoryPath) {
   if (fs.existsSync(directoryPath)) {
     fs.readdirSync(directoryPath).forEach((file, index) => {
       const curPath = path.join(directoryPath, file);

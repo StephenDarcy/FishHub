@@ -1,6 +1,6 @@
 #* @filter cors
 cors <- function(res) {
-    res$setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res$setHeader("Access-Control-Allow-Origin", "http://localhost:8888")
     res$setHeader("Access-Control-Allow-Credentials ", "true")
     plumber::forward()
 }
@@ -50,11 +50,5 @@ get_aquarium <- function(scientific) {
 #* @get /r/parameters
 get_parameters <- function(scientific) {
   print(scientific)
-  rfishbase::introductions(scientific)
-}
-
-#* @get /r/swim
-get_swim <- function(scientific) {
-  print(scientific)
-  rfishbase::swimming(scientific)
+  rfishbase::stocks(scientific)
 }

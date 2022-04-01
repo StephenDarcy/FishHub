@@ -5,33 +5,36 @@ import { useState, useEffect } from "react";
 
 export default function SpeciesProfile() {
   const { Species } = useParams();
-  const [country, setCountry] = useState();
+  const [data, setData] = useState();
   const [loading, isLoading] = useState(true);
 
   useEffect(() => {
-    FishService.getCountry(Species)
-      .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
+    fetchData();
 
-        if (response.status === 200) {
-          setCountry([]);
-          setCountry(response.data);
-          isLoading(false);
-        } else {
-          console.log("Error fetching country");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+    async function fetchData() {
+      await FishService.getAllData(Species).then((response) => {
+        setData(response);
+        isLoading(false);
       });
+      console.log(data);
+    }
   }, [Species]);
 
-  console.log(Species);
   return (
     <div>
       <h1>Species Profile: {Species}</h1>
-      {loading ? <p>loading</p> : <h2>Country: {country[0].country}</h2>}
+      {loading ? (
+        <p>loading</p>
+      ) : (
+        <>
+          <img
+            className="search-image"
+            src={"http://localhost:6868/api/image/" + Species}
+            alt="https://place-hold.it/300"
+          ></img>
+          <h2>{data.countries[0].status}</h2>
+        </>
+      )}
     </div>
   );
 }

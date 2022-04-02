@@ -5,7 +5,6 @@ import Col from "react-bootstrap/Col";
 import "../Styles/Search.css";
 import FishService from "../Services/FishService";
 import SearchResult from "./SearchResult";
-import ImageService from "../Services/ImageService";
 import FadeLoader from "react-spinners/FadeLoader";
 import Button from "react-bootstrap/Button";
 import TextField from "@mui/material/TextField";
@@ -43,7 +42,7 @@ function Search() {
     e.preventDefault();
     setLoading(true);
     setPageState("results");
-    FishService.getScientific(search)
+    await FishService.getScientific(search)
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
@@ -52,7 +51,6 @@ function Search() {
           setLoading(false);
           setData([]);
           setData(refineData(response.data));
-          deleteImages();
           //if only one result redirect
           if (response.data.length == 1) {
             navigate("/" + response.data[0].Species);
@@ -64,10 +62,6 @@ function Search() {
       .catch((error) => {
         console.error(error);
       });
-  };
-
-  const deleteImages = () => {
-    ImageService.deleteAll();
   };
 
   const returnToSearch = () => {

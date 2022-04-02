@@ -32,7 +32,7 @@ function SearchResult(props) {
         Scientific Name: {props.Species}
       </CardContent>
       <CardActions>
-        <Link to={`${props.Species}`}>
+        <Link to={`/${props.Species}`}>
           <Button variant="text">See More</Button>
         </Link>
       </CardActions>

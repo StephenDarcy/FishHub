@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import FishService from "../Services/FishService";
 import SearchResult from "./SearchResult";
+import "../Styles/SearchDialog.css";
 
 export default function SearchDialog(props) {
   const [open, setOpen] = useState(false);
@@ -105,12 +106,12 @@ export default function SearchDialog(props) {
                 <>
                   <h6>Select a fish from below</h6>
                   {data.map((species) => (
-                    <SearchResult
+                    <div
                       className="search-results"
-                      selectFish={handleChoice}
                       key={species.SpecCode + species.ComName + species.Species}
-                      {...species}
-                    />
+                    >
+                      <SearchResult selectFish={handleChoice} {...species} />
+                    </div>
                   ))}
                 </>
               )}

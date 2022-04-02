@@ -27,10 +27,10 @@ export default function CompatibilityTool() {
       </Row>
       <Row className="profile-row">
         <Col className="profile-col">
-          <DisplayFish loading />
+          <DisplayFish species={firstFish} />
         </Col>
         <Col className="profile-col">
-          <DisplayFish loading />
+          <DisplayFish species={secondFish} />
         </Col>
       </Row>
       <Row>

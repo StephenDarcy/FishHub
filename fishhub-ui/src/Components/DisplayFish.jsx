@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -12,6 +12,15 @@ import Skeleton from "@mui/material/Skeleton";
 export default function DisplayFish(props) {
   const { loading = false } = props;
 
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = useState({
+    avatar: "sampleImage",
+    title: "Sample Fish",
+    image: "../Images/fish-icon.webp",
+    subTitle: "",
+    bottomText: "",
+  });
+
   return (
     <Card sx={{ minWidth: 345, maxWidth: 600, m: 2 }}>
       <CardHeader
@@ -24,10 +33,7 @@ export default function DisplayFish(props) {
               height={40}
             />
           ) : (
-            <Avatar
-              alt="Ted talk"
-              src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-            />
+            <Avatar alt="Fish" src={data.avatar} />
           )
         }
         action={
@@ -42,14 +48,14 @@ export default function DisplayFish(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            "Ted"
+            data.title
           )
         }
         subheader={
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            "5 hours ago"
+            data.subTitle
           )
         }
       />
@@ -59,8 +65,8 @@ export default function DisplayFish(props) {
         <CardMedia
           component="img"
           height="140"
-          image="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
-          alt="Nicola Sturgeon on a TED talk stage"
+          image={data.image}
+          alt="Species Image"
         />
       )}
 
@@ -76,9 +82,7 @@ export default function DisplayFish(props) {
           </React.Fragment>
         ) : (
           <Typography variant="body2" color="text.secondary" component="p">
-            {
-              "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
-            }
+            {data.bottomText}
           </Typography>
         )}
       </CardContent>
@@ -88,4 +92,5 @@ export default function DisplayFish(props) {
 
 DisplayFish.propTypes = {
   loading: PropTypes.bool,
+  species: PropTypes.string,
 };

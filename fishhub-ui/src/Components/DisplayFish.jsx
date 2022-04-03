@@ -8,15 +8,25 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
+import sampleImg1 from "../Images/fish-icon.webp";
+import sampleImg2 from "../Images/fish-icon2.webp";
 
 export default function DisplayFish(props) {
   const { loading = false } = props;
 
+  let getSampleImage = () => {
+    if (props.number == 1) {
+      return sampleImg1;
+    } else {
+      return sampleImg2;
+    }
+  };
+
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState({
     avatar: "sampleImage",
-    title: "Sample Fish",
-    image: "../Images/fish-icon.webp",
+    title: `Sample Fish ${props.number}`,
+    image: `${getSampleImage}`,
     subTitle: "",
     bottomText: "",
   });
@@ -64,8 +74,8 @@ export default function DisplayFish(props) {
       ) : (
         <CardMedia
           component="img"
-          height="140"
-          image={data.image}
+          height="400"
+          image={getSampleImage()}
           alt="Species Image"
         />
       )}
@@ -93,4 +103,5 @@ export default function DisplayFish(props) {
 DisplayFish.propTypes = {
   loading: PropTypes.bool,
   species: PropTypes.string,
+  number: PropTypes.number,
 };

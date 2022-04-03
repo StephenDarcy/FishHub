@@ -27,19 +27,22 @@ export default function CompatibilityTool() {
       </Row>
       <Row className="profile-row">
         <Col className="profile-col">
-          <DisplayFish species={firstFish} />
+          <DisplayFish number={1} species={firstFish} />
         </Col>
         <Col className="profile-col">
-          <DisplayFish species={secondFish} />
+          <DisplayFish number={2} species={secondFish} />
         </Col>
       </Row>
       <Row>
         <Col className="profile-col">
-          <SearchDialog setFish={handleFirst} />
+          <SearchDialog number={1} setFish={handleFirst} />
         </Col>
         <Col className="profile-col">
-          <SearchDialog setFish={handleSecond} />
+          <SearchDialog number={2} setFish={handleSecond} />
         </Col>
+      </Row>
+      <Row>
+        <h2>Select two species of fish to compare their compatibility</h2>
       </Row>
     </Container>
   );

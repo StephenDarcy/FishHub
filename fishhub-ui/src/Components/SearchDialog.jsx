@@ -67,7 +67,7 @@ export default function SearchDialog(props) {
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Select to add a fish
+        Click to add fish {props.number}
       </Button>
       <Dialog
         open={open}
@@ -87,7 +87,7 @@ export default function SearchDialog(props) {
                 <>
                   <DialogContentText>
                     Search from over 34,800 fish below, to compare the
-                    compatibility with another fish in a aquarium or ecosystem
+                    compatibility with another fish in an aquarium or ecosystem
                   </DialogContentText>
                   <form onSubmit={handleSearch}>
                     <TextField
@@ -130,6 +130,7 @@ export default function SearchDialog(props) {
 
 SearchDialog.propTypes = {
   setFish: PropTypes.func,
+  number: PropTypes.number,
 };
 
 const refineData = (data) => {

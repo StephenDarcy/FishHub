@@ -38,9 +38,6 @@ export default function SearchDialog(props) {
     setSearching(true);
     await FishService.getScientific(currentFish)
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
-
         if (response.status === 200) {
           setSearching(false);
           setSearchComplete(true);

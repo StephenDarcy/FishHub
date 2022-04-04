@@ -1,51 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
-import sampleImg1 from "../Images/fish-icon.webp";
-import sampleImg2 from "../Images/fish-icon2.webp";
+import sampleImg from "../Images/sample-icon.webp";
+import FishService from "../Services/FishService";
 
 export default function DisplayFish(props) {
-  const { loading = false } = props;
-
-  let getSampleImage = () => {
-    if (props.number == 1) {
-      return sampleImg1;
-    } else {
-      return sampleImg2;
-    }
-  };
+  const [loading, isLoading] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState({
-    avatar: "sampleImage",
     title: `Sample Fish ${props.number}`,
-    image: `${getSampleImage}`,
+    image: sampleImg,
     subTitle: "",
     bottomText: "",
   });
 
+  // add first 4 common names as subheading
+  let getCommonNames = (names) => {
+    let namesString = names[0].name + ", ";
+
+    for (let i = 1; i < 3; i++) {
+      if (names[i]) {
+        namesString += names[i].name + ", ";
+      }
+    }
+
+    // remove trailing comma
+    return namesString.substring(0, namesString.length - 2);
+  };
+
+  let getBottomText = (parameters, ecosystem) => {
+    let text = "";
+
+    if (ecosystem[0]) {
+      text += " Water type: " + ecosystem[0].salinity;
+    }
+
+    // checking to make sure temp not undefined.
+    if (parameters[0].minTemp && parameters[0].maxTemp) {
+      text +=
+        " Temperature range: " +
+        parameters[0].minTemp +
+        "°C to " +
+        parameters[0].maxTemp +
+        "°C";
+    }
+
+    // checking to make sure not pH undefined.
+    if (parameters[0].minPH && parameters[0].maxPH) {
+      text +=
+        " pH range: " +
+        parameters[0].minPH +
+        "pH to " +
+        parameters[0].maxPH +
+        "pH";
+    }
+
+    // checking to make sure not dH undefined.
+    if (parameters[0].maxDH) {
+      text += " Water hardness: " + parameters[0].maxDH + "°dH";
+    }
+
+    return text;
+  };
+
+  useEffect(() => {
+    fetchData();
+    async function fetchData() {
+      if (props.species) {
+        isLoading(true);
+        await FishService.getAllData(props.species).then((response) => {
+          let image = `http://localhost:6868/api/image/ + ${props.species}`;
+          setData({
+            title: `${props.species}`,
+            image: image,
+            subTitle: getCommonNames(response.commonNames),
+            bottomText: getBottomText(response.parameters, response.ecosystem),
+          });
+          props.setData(response);
+          isLoading(false);
+        });
+      }
+    }
+  }, [props.species]);
+
   return (
     <Card sx={{ minWidth: 345, maxWidth: 600, m: 2 }}>
       <CardHeader
-        avatar={
-          loading ? (
-            <Skeleton
-              animation="wave"
-              variant="circular"
-              width={40}
-              height={40}
-            />
-          ) : (
-            <Avatar alt="Fish" src={data.avatar} />
-          )
-        }
         action={
           loading ? null : <IconButton aria-label="settings"></IconButton>
         }
@@ -54,7 +101,7 @@ export default function DisplayFish(props) {
             <Skeleton
               animation="wave"
               height={10}
-              width="80%"
+              width="100%"
               style={{ marginBottom: 6 }}
             />
           ) : (
@@ -70,12 +117,12 @@ export default function DisplayFish(props) {
         }
       />
       {loading ? (
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+        <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
+          style={{ height: 300 }}
           component="img"
-          height="400"
-          image={getSampleImage()}
+          image={data.image}
           alt="Species Image"
         />
       )}
@@ -101,7 +148,7 @@ export default function DisplayFish(props) {
 }
 
 DisplayFish.propTypes = {
-  loading: PropTypes.bool,
   species: PropTypes.string,
   number: PropTypes.number,
+  setData: PropTypes.func,
 };

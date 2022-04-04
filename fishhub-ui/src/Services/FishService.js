@@ -8,6 +8,14 @@ const getScientific = (data) => {
   });
 };
 
+const getCommon = (data) => {
+  return http.get(`/common`, {
+    params: {
+      scientific: data,
+    },
+  });
+};
+
 const getCountry = (data) => {
   return http.get(`/country`, {
     params: {
@@ -74,6 +82,7 @@ const getAllData = async (data) => {
     food: [],
     foodchain: [],
     parameters: [],
+    commonNames: [],
   };
 
   // getting all the country data
@@ -224,6 +233,25 @@ const getAllData = async (data) => {
   } catch (error) {
     console.log("Could not get parameter data: " + error);
   }
+
+  // getting common names
+  try {
+    await getCommon(data).then((response) => {
+      let commonNames = response.data;
+      commonNames.forEach((commonName) => {
+        let commonNamesObj = {
+          name: "",
+        };
+
+        commonNamesObj.name = commonName.ComName;
+
+        responseData["commonNames"].push(commonNamesObj);
+      });
+    });
+  } catch (error) {
+    console.log("Could not get common names: " + error);
+  }
+
   return responseData;
 };
 
@@ -236,6 +264,7 @@ const FishService = {
   getFood,
   getFoodchain,
   getParameters,
+  getCommon,
   getAllData,
 };
 

@@ -5,10 +5,13 @@ import DisplayFish from "../Components/DisplayFish";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SearchDialog from "../Components/SearchDialog";
+import CompatibilityCalculator from "../Components/CompatibilityCalculator";
 
 export default function CompatibilityTool() {
   const [firstFish, setFirstFish] = useState("");
   const [secondFish, setSecondFish] = useState("");
+  const [firstFishData, setFirstFishData] = useState();
+  const [secondFishData, setSecondFishData] = useState();
 
   function handleFirst(scientificName) {
     setFirstFish(scientificName);
@@ -18,7 +21,13 @@ export default function CompatibilityTool() {
     setSecondFish(scientificName);
   }
 
-  console.log(firstFish, secondFish);
+  function handleFirstData(data) {
+    setFirstFishData(data);
+  }
+
+  function handleSecondData(data) {
+    setSecondFishData(data);
+  }
   return (
     <Container className="compatibility-container">
       <Row>
@@ -27,10 +36,18 @@ export default function CompatibilityTool() {
       </Row>
       <Row className="profile-row">
         <Col className="profile-col">
-          <DisplayFish number={1} species={firstFish} />
+          <DisplayFish
+            number={1}
+            species={firstFish}
+            setData={handleFirstData}
+          />
         </Col>
         <Col className="profile-col">
-          <DisplayFish number={2} species={secondFish} />
+          <DisplayFish
+            number={2}
+            species={secondFish}
+            setData={handleSecondData}
+          />
         </Col>
       </Row>
       <Row>
@@ -43,6 +60,10 @@ export default function CompatibilityTool() {
       </Row>
       <Row>
         <h2>Select two species of fish to compare their compatibility</h2>
+        <CompatibilityCalculator
+          first={firstFishData}
+          second={secondFishData}
+        />
       </Row>
     </Container>
   );

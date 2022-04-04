@@ -11,6 +11,12 @@ get_scientific <- function(common) {
   rfishbase::common_to_sci(common)
 }
 
+#* @get /r/common
+get_common <- function(scientific) {
+  print(scientific)
+  rfishbase::common_names(scientific)
+}
+
 #* @get /r/country
 get_country <- function(scientific) {
   print(scientific)

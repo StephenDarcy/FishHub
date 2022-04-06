@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../Styles/Home.css";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";

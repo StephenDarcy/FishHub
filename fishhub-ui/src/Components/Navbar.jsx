@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { IoMdClose as CloseIcon } from "react-icons/io";
@@ -12,12 +12,21 @@ import logo from "../Images/logo-transparent-blue.png";
 import logoWhite from "../Images/logo-transparent-white.png";
 import AuthContext from "../Context/Auth";
 import LogOut from "./LogOut";
+import UserService from "../Services/UserService";
 
 function Navbar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { loggedIn } = useContext(AuthContext);
+  const [userID, setUserID] = useState();
+
+  // sends a request to server with JWT cookie and gets userID back
+  useEffect(() => {
+    UserService.getID().then((response) => {
+      setUserID(response.data);
+    });
+  }, []);
 
   return (
     <>
@@ -42,7 +51,9 @@ function Navbar() {
           {loggedIn === true && (
             <>
               <LogOut />
-              <AccountIcon className="icon" size="30" />
+              <Link to={"/profile/" + userID}>
+                <AccountIcon className="icon" size="30" />
+              </Link>
             </>
           )}
 
@@ -54,7 +65,7 @@ function Navbar() {
                 onClick={handleClose}
               />
             </Offcanvas.Header>
-            <Offcanvas.Body>
+            <Offcanvas.Body className="sidebar-body">
               <Link to="/" onClick={handleClose}>
                 <img src={logoWhite} alt="FishHub" className="sidebar-logo" />
               </Link>

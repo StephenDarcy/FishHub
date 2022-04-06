@@ -25,6 +25,10 @@ const loggedIn = () => {
   return http.get("/users/loggedIn/");
 };
 
+const getID = () => {
+  return http.get("/users/getUserID/");
+};
+
 const UserService = {
   getAll,
   get,
@@ -34,5 +38,6 @@ const UserService = {
   login,
   logout,
   loggedIn,
+  getID,
 };
 export default UserService;

@@ -3,6 +3,24 @@ const User = db.users;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// endpoint to check cookie and get user ID
+exports.getUserID = (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.json("no cookie");
+
+    jwt.verify(token, process.env.JWT, function (error, decoded) {
+      try {
+        res.send(decoded.userID);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 // getting all users
 exports.findAll = (req, res) => {
   User.find()
@@ -70,7 +88,6 @@ exports.create = async (req, res) => {
         httpOnly: true,
       })
       .send();
-    //res.send(JSON.stringify(token));
   } catch (err) {
     console.log("Signup failed");
     console.log(err);
@@ -127,7 +144,6 @@ exports.login = async (req, res) => {
         httpOnly: true,
       })
       .send();
-    //res.send(JSON.stringify(token));
   } catch (err) {
     console.log(err);
     res.status(500).send();

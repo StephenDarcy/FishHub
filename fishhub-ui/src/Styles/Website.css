@@ -1,0 +1,18 @@
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-row {
+  height: 6vh;
+}
+
+.body-row {
+  height: 94vh;
+  background: rgb(212, 228, 252);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 228, 252, 1) 0%,
+    rgba(119, 166, 247, 1) 100%
+  );
+}

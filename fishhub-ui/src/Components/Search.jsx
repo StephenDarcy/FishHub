@@ -136,7 +136,7 @@ function Search() {
         <Container className="results-page">
           <h1>Your search returned several results</h1>
           <Button onClick={returnToSearch}>Return to search page</Button>
-          <Scrollbars style={{ height: "80%" }}>
+          <Scrollbars style={{ height: "85%" }}>
             {loading ? (
               <FadeLoader size={500} />
             ) : (

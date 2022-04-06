@@ -5,7 +5,7 @@ import UserService from "../Services/UserService";
 const AuthContext = createContext();
 
 function Auth(props) {
-  const [loggedIn, setLoggedIn] = useState(undefined);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   async function getLoggedIn() {
     const response = await UserService.loggedIn();

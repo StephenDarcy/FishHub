@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   router.post("/", users.create);
 
+  router.post("/avatar", users.avatar);
+
   router.post("/login", users.login);
 
   router.get("/logout", users.logout);
@@ -14,7 +16,7 @@ module.exports = (app) => {
 
   router.get("/loggedIn", users.loggedIn);
 
-  router.get("/:id", users.findOne);
+  router.get("/getUser", users.findOne);
 
   router.delete("/:id", users.delete);
 

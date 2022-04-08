@@ -95,6 +95,28 @@ exports.create = async (req, res) => {
   }
 };
 
+// stores base64 user avatar in database
+exports.avatar = async (req, res) => {
+  try {
+    // get image and create buffer
+    let imageBase64 = req.body.avatar;
+    imageBase64 = imageBase64.split(",")[1];
+    let avatarImg = Buffer.from(imageBase64, "base64");
+
+    // get user ID from token
+    const token = req.cookies.token;
+    if (!token) return res.json("no cookie");
+
+    let id = getIdFromToken(token);
+
+    await User.findByIdAndUpdate(id, { avatar: avatarImg });
+
+    res.json("Image stored");
+  } catch (error) {
+    res.status(400).json("Error: " + error);
+  }
+};
+
 // user login
 exports.login = async (req, res) => {
   console.log("Attempting to login..");
@@ -165,7 +187,13 @@ exports.logout = (req, res) => {
 
 // Find a single user with an id
 exports.findOne = (req, res) => {
-  User.findById(req.params.id)
+  // get user ID from token
+  const token = req.cookies.token;
+  if (!token) return res.json("no cookie");
+
+  let id = getIdFromToken(token);
+
+  User.findById(id)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -206,4 +234,10 @@ exports.loggedIn = (req, res) => {
   } catch (error) {
     res.json(false);
   }
+};
+
+//verify token and return ID
+let getIdFromToken = (token) => {
+  let decoded = jwt.verify(token, process.env.JWT);
+  return decoded.userID;
 };

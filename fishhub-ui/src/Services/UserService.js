@@ -2,8 +2,8 @@ import http from "../http-common";
 const getAll = () => {
   return http.get("/users/");
 };
-const get = (id) => {
-  return http.get(`/users/${id}`);
+const get = () => {
+  return http.get(`/users/getUser`);
 };
 const create = (data) => {
   return http.post("/users/", data);
@@ -29,6 +29,10 @@ const getID = () => {
   return http.get("/users/getUserID/");
 };
 
+const uploadAvatar = (data) => {
+  return http.post("/users/avatar/", data);
+};
+
 const UserService = {
   getAll,
   get,
@@ -39,5 +43,6 @@ const UserService = {
   logout,
   loggedIn,
   getID,
+  uploadAvatar,
 };
 export default UserService;

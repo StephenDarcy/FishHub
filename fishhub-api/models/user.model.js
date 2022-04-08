@@ -29,6 +29,12 @@ module.exports = (mongoose) => {
         required: "Password is required",
         trim: true,
       },
+      avatar: Buffer,
+      firstName: String,
+      surname: String,
+      number: String,
+      country: String,
+      city: String,
     },
     {
       timestamps: true,

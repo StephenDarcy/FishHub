@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { HiMenu as MenuIcon } from "react-icons/hi";
 import { IoMdClose as CloseIcon } from "react-icons/io";
 import { SidebarData as SidebarItems } from "../Data/SidebarData";
-import { FaRegUserCircle as AccountIcon } from "react-icons/fa";
 import BootstrapNavbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -13,6 +12,8 @@ import logoWhite from "../Images/logo-transparent-white.png";
 import AuthContext from "../Context/Auth";
 import LogOut from "./LogOut";
 import UserService from "../Services/UserService";
+import Avatar from "@mui/material/Avatar";
+import SampleUserImg from "../Images/sample-user.webp";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -20,13 +21,30 @@ function Navbar() {
   const handleShow = () => setShow(true);
   const { loggedIn } = useContext(AuthContext);
   const [userID, setUserID] = useState();
+  const [imgSrc, setImgSrc] = useState();
 
   // sends a request to server with JWT cookie and gets userID back
   useEffect(() => {
     UserService.getID().then((response) => {
       setUserID(response.data);
     });
+
+    async function getUser() {
+      await UserService.get().then((response) => {
+        setImgSrc(response.data.avatar);
+      });
+    }
+
+    getUser();
   }, []);
+
+  let getImage = () => {
+    if (imgSrc) {
+      return `data:image/png;base64,${imgSrc}`;
+    } else {
+      return SampleUserImg;
+    }
+  };
 
   return (
     <>
@@ -52,7 +70,7 @@ function Navbar() {
             <>
               <LogOut />
               <Link to={"/profile/" + userID}>
-                <AccountIcon className="icon" size="30" />
+                <Avatar className="icon" src={getImage()} alt="User" />
               </Link>
             </>
           )}

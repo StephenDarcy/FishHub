@@ -96,24 +96,19 @@ function Search() {
                       <SearchIcon />
                     </InputAdornment>
                   ),
-                  classes: {
-                    root: {
-                      border: "3px solid #77a6f7",
-                    },
-                  },
                 }}
                 sx={{
                   width: "100%",
                   border: "3px solid #77a6f7",
                   height: "100%",
-                  borderRadius: "20px",
+                  borderRadius: "10px",
                   outline: "none",
                   backgroundColor: "white",
                 }}
               />
             </Row>
 
-            <Row>
+            <Row xs={1} sm={1} md={2}>
               <Col className="btn-col">
                 <Button
                   className="search-btn"

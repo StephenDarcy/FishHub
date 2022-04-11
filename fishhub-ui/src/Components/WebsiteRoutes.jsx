@@ -15,6 +15,7 @@ import Signup from "../Pages/Signup.jsx";
 import AuthContext from "../Context/Auth";
 import Row from "react-bootstrap/Row";
 import "../Styles/Website.css";
+import Thread from "../Pages/Thread";
 
 export default function WebsiteRoutes() {
   const { loggedIn } = useContext(AuthContext);
@@ -47,6 +48,7 @@ export default function WebsiteRoutes() {
           <Route path="/c02" element={<AquariumC02 />} />
           <Route path="/size" element={<AquariumSize />} />
           <Route path="/forums" element={<Forums />} />
+          <Route path="/forums/:id" element={<Thread />} />
           <Route path=":Species" element={<SpeciesProfile />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

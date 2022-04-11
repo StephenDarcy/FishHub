@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import "../Styles/EditProfile.css";
 import UserAvatar from "./UserAvatar";
 import UploadImageDialog from "./UploadImageDialog";
-import SampleUserImg from "../Images/sample-user.webp";
+import SampleUserImg from "../Images/sample-user.png";
 import UserService from "../Services/UserService";
 
 export default function EditProfile() {

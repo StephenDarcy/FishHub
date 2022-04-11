@@ -37,6 +37,8 @@ app.get("/", (req, res) => {
 
 require("./routes/user.routes")(app);
 require("./routes/image.routes")(app);
+require("./routes/thread.routes")(app);
+require("./routes/threadPost.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

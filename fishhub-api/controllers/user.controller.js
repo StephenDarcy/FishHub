@@ -221,6 +221,17 @@ exports.update = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+// Find a user avatar by the id in the request
+exports.getUserAvatar = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      let avatar = user.avatar;
+      let base64 = avatar.toString("base64");
+      res.json(base64);
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+};
+
 // endpoint to check if user logged in
 exports.loggedIn = (req, res) => {
   console.log("Checking if user logged in...");

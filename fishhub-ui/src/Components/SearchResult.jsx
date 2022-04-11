@@ -15,7 +15,9 @@ function SearchResult(props) {
   }, []);
 
   let handleClick = () => {
-    props.selectFish(props.Species);
+    if (props.selectFish) {
+      props.selectFish(props.Species);
+    }
   };
 
   return (

@@ -1,0 +1,42 @@
+.forum-box {
+  padding: 2%;
+}
+
+.top-row {
+}
+
+.top-mid-col {
+  text-align: center;
+}
+
+.top-right-col {
+  text-align: right;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  cursor: pointer;
+}
+
+.pagination a {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #77a6f7;
+  color: #77a6f7;
+}
+
+.pagination__link {
+  font-weight: bold;
+}
+
+.pagination__link--active a {
+  color: #fff;
+  background: #77a6f7;
+}
+
+.pagination__link--disabled a {
+  color: rgb(198, 197, 202);
+  border: 1px solid rgb(198, 197, 202);
+}

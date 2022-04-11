@@ -4,6 +4,8 @@ module.exports = (app) => {
 
   router.get("/getUserID", users.getUserID);
 
+  router.get("/getUserAvatar/:id", users.getUserAvatar);
+
   router.post("/", users.create);
 
   router.post("/avatar", users.avatar);

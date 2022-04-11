@@ -29,6 +29,10 @@ const getID = () => {
   return http.get("/users/getUserID/");
 };
 
+const getUserAvatar = (id) => {
+  return http.get(`/users/getUserAvatar/${id}`);
+};
+
 const uploadAvatar = (data) => {
   return http.post("/users/avatar/", data);
 };
@@ -44,5 +48,6 @@ const UserService = {
   loggedIn,
   getID,
   uploadAvatar,
+  getUserAvatar,
 };
 export default UserService;

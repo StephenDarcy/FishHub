@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import SampleUserImg from "../Images/sample-user.webp";
+import SampleUserImg from "../Images/sample-user.png";
 import AvatarEditor from "react-avatar-editor";
 import PropTypes from "prop-types";
 import UserService from "../Services/UserService";

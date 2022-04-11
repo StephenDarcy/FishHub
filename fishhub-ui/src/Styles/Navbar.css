@@ -19,6 +19,10 @@
   padding-left: 8%;
 }
 
+.nav-row {
+  width: 100%;
+}
+
 .sidebar-item a {
   text-decoration: none;
   color: white;
@@ -50,11 +54,11 @@
 .icon {
   cursor: pointer;
   color: #77a6f7;
-  background: none;
+  border-radius: 100%;
 }
 
 .icon:hover {
-  color: #d3e3fc;
+  background-color: #d3e3fc;
 }
 
 .icon-close {

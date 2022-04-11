@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Button from "react-bootstrap/Button";
 import AuthContext from "../Context/Auth";
 import UserService from "../Services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { BiLogOut } from "react-icons/bi";
 
 export default function LogOut() {
   const { getLoggedIn } = useContext(AuthContext);
@@ -22,5 +22,12 @@ export default function LogOut() {
     navigate("/");
   }
 
-  return <Button onClick={logOut}>Logout</Button>;
+  return (
+    <BiLogOut
+      style={{ width: 35, height: 35, color: "#77a6f7", marginLeft: 5 }}
+      onClick={logOut}
+    >
+      Logout
+    </BiLogOut>
+  );
 }

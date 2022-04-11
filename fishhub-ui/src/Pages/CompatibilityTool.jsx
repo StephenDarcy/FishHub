@@ -34,7 +34,7 @@ export default function CompatibilityTool() {
         <h1>Fish Comparison</h1>
         <h2>Check the compatibility of fish based on water parameters</h2>
       </Row>
-      <Row className="profile-row">
+      <Row className="profile-row" xs={1} md={2}>
         <Col className="profile-col">
           <DisplayFish
             number={1}

@@ -13,7 +13,8 @@ import AuthContext from "../Context/Auth";
 import LogOut from "./LogOut";
 import UserService from "../Services/UserService";
 import Avatar from "@mui/material/Avatar";
-import SampleUserImg from "../Images/sample-user.webp";
+import SampleUserImg from "../Images/sample-user.png";
+import Col from "react-bootstrap/Col";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -50,12 +51,17 @@ function Navbar() {
     <>
       <BootstrapNavbar className="navbar">
         <Container fluid>
-          <MenuIcon className="icon" onClick={handleShow} size="30" />
-          <BootstrapNavbar.Brand>
-            <Link to="/">
-              <img src={logo} alt="FishHub" className="logo" />
-            </Link>
-          </BootstrapNavbar.Brand>
+          <Col>
+            <MenuIcon className="icon" onClick={handleShow} size="30" />
+          </Col>
+          <Col>
+            <BootstrapNavbar.Brand>
+              <Link to="/">
+                <img src={logo} alt="FishHub" className="logo" />
+              </Link>
+            </BootstrapNavbar.Brand>
+          </Col>
+
           {loggedIn === false && (
             <>
               <Link to="/login">
@@ -68,10 +74,15 @@ function Navbar() {
           )}
           {loggedIn === true && (
             <>
-              <LogOut />
               <Link to={"/profile/" + userID}>
-                <Avatar className="icon" src={getImage()} alt="User" />
+                <Avatar
+                  className="icon"
+                  src={getImage()}
+                  alt="User"
+                  sx={{ width: 35, height: 35 }}
+                />
               </Link>
+              <LogOut />
             </>
           )}
 

@@ -22,7 +22,7 @@ exports.find = async (req, res) => {
 exports.delete = async (req, res) => {
   dir = "/fishhub-api/images";
   try {
-    //removeDir(dir);
+    removeDir(dir);
     res.status(200).json("Images Deleted");
   } catch (error) {
     res.status(400).json("Error: " + error);
@@ -95,7 +95,6 @@ var removeDir = function (directoryPath) {
           fs.unlinkSync(curPath);
         }
       });
-      fs.rmdirSync(directoryPath);
     }
   } catch (error) {
     console.log(error);

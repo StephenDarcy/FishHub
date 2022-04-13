@@ -57,9 +57,14 @@ export default function ThreadPost(props) {
   };
   return (
     <Container>
-      <Row>
+      <Row style={{ borderTop: "1px solid #b9b9b9" }}>
         <Col>
-          <UserAvatar img={SampleUserImg} avatar={avatar} />
+          <UserAvatar
+            height={35}
+            width={35}
+            img={SampleUserImg}
+            avatar={avatar}
+          />
         </Col>
         <Col xs={11}>
           {loading ? (

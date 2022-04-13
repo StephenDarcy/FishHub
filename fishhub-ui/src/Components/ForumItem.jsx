@@ -57,8 +57,8 @@ export default function ForumItem(props) {
       <Row onClick={handleClick} className="forum-item">
         <Col className="user-col">
           <UserAvatar
-            height={50}
-            width={50}
+            height={35}
+            width={35}
             img={SampleUserImg}
             avatar={avatar}
           />

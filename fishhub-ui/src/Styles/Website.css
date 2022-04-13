@@ -4,11 +4,11 @@
 }
 
 .nav-row {
-  height: 6vh;
+  height: 8vh;
 }
 
 .body-row {
-  height: 94vh;
+  height: 92vh;
   background: rgb(212, 228, 252);
   background: linear-gradient(
     180deg,

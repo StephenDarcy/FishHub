@@ -3,7 +3,9 @@ import ReactAvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import UserService from "../Services/UserService";
 import SampleUserImg from "../Images/sample-user.png";
-import Button from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 // some code taken from sample application for react-avatar-editor
 export default class ReactAvatar extends React.Component {
@@ -135,7 +137,6 @@ export default class ReactAvatar extends React.Component {
                 className="editor-canvas"
                 disableCanvasRotation={this.state.disableCanvasRotation}
               />
-              <br />
 
               <input
                 name="newImage"
@@ -144,58 +145,83 @@ export default class ReactAvatar extends React.Component {
                 {...getInputProps()}
                 style={{ display: "initial" }}
               />
+              <Button
+                size="small"
+                variant="contained"
+                color="success"
+                onClick={this.handleSave}
+                disableElevation
+              >
+                Upload
+              </Button>
             </div>
           )}
         </Dropzone>
-        <br />
-        Zoom:
-        <input
-          name="scale"
-          type="range"
-          onChange={this.handleScale}
-          min={this.state.allowZoomOut ? "0.1" : "1"}
-          max="2"
-          step="0.01"
-          defaultValue="1"
-        />
-        <br />
-        Rotate:
-        <Button onClick={this.rotateLeft}>Left</Button>
-        <Button onClick={this.rotateRight}>Right</Button>
-        <br />
-        Rotation Scale:
-        <input
-          name="scale"
-          type="range"
-          onChange={this.rotateScale}
-          min="0"
-          max="180"
-          step="1"
-          defaultValue="0"
-        />
-        <br />
-        Transparent image?
-        <input
-          type="checkbox"
-          onChange={this.setTransparent}
-          defaultChecked={this.state.isTransparent}
-        ></input>
-        <br />
-        {this.state.isTransparent && (
-          <div style={{ marginLeft: "1rem" }}>
-            Background color:
-            <input
-              name="backgroundColor"
-              type="color"
-              defaultValue={this.state.backgroundColor}
-              onChange={this.setBackgroundColor}
-            />
-            <br />
-          </div>
-        )}
-        <br />
-        <Button onClick={this.handleSave}>Upload</Button>
-        <br />
+        <Row>
+          <h6 style={{ textAlign: "left", marginTop: 20 }}>
+            If needed, adjust your image
+          </h6>
+          <Col>
+            <Row>
+              Adjust Rotation
+              <input
+                name="scale"
+                type="range"
+                onChange={this.rotateScale}
+                min="0"
+                max="360"
+                step="1"
+                defaultValue="0"
+              />
+            </Row>
+            <Row>
+              Adjust the zoom
+              <input
+                name="scale"
+                type="range"
+                onChange={this.handleScale}
+                min={this.state.allowZoomOut ? "0.1" : "1"}
+                max="2"
+                step="0.01"
+                defaultValue="1"
+              />
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              Rotate
+              <Col>
+                <Button onClick={this.rotateLeft}>Left</Button>
+              </Col>
+              <Col>
+                <Button onClick={this.rotateRight}>Right</Button>
+              </Col>
+            </Row>
+            <Row>
+              <Row>
+                Transparent?
+                <input
+                  type="checkbox"
+                  onChange={this.setTransparent}
+                  defaultChecked={this.state.isTransparent}
+                ></input>
+              </Row>
+              <Row>
+                {this.state.isTransparent && (
+                  <div style={{ marginLeft: "1rem" }}>
+                    Background color:
+                    <input
+                      name="backgroundColor"
+                      type="color"
+                      defaultValue={this.state.backgroundColor}
+                      onChange={this.setBackgroundColor}
+                    />
+                  </div>
+                )}
+              </Row>
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
   }

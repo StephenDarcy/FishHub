@@ -1,0 +1,10 @@
+.forum-item {
+  border-top: 1px solid #b9b9b9;
+  height: 10%;
+}
+
+.user-col {
+  justify-content: center;
+  align-items: center;
+  padding-top: 1%;
+}

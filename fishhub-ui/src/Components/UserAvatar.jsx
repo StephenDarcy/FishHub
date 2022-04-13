@@ -1,5 +1,5 @@
 import React from "react";
-import Figure from "react-bootstrap/Figure";
+import Avatar from "@mui/material/Avatar";
 import PropTypes from "prop-types";
 
 export default function UserAvatar(props) {
@@ -11,12 +11,21 @@ export default function UserAvatar(props) {
     }
   };
   return (
-    <Figure>
-      <Figure.Image width={120} height={120} alt="171x180" src={getImage()} />
-    </Figure>
+    <Avatar
+      className="icon"
+      src={getImage()}
+      alt="User"
+      sx={{
+        width: props.width || 120,
+        height: props.height || 120,
+        border: "1px solid #b9b9b9",
+      }}
+    />
   );
 }
 UserAvatar.propTypes = {
   avatar: PropTypes.string,
   img: PropTypes.img,
+  height: PropTypes.number,
+  width: PropTypes.number,
 };

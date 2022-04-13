@@ -79,7 +79,7 @@ function Navbar() {
                   className="icon"
                   src={getImage()}
                   alt="User"
-                  sx={{ width: 35, height: 35 }}
+                  sx={{ width: 35, height: 35, border: "1px solid #b9b9b9" }}
                 />
               </Link>
               <LogOut />

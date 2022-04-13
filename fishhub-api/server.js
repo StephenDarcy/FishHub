@@ -4,7 +4,6 @@ var cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
-const PORT = process.env.NODE_DOCKER_PORT || 8080;
 const app = express();
 app.use(cookieParser());
 var corsOptions = {
@@ -40,6 +39,7 @@ require("./routes/image.routes")(app);
 require("./routes/thread.routes")(app);
 require("./routes/threadPost.routes")(app);
 
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

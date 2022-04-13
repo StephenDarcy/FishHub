@@ -1,10 +1,21 @@
-const { Thread } = require("../models/thread.model");
+const db = require("../models");
+const Thread = db.threads;
 const jwt = require("jsonwebtoken");
 
 // getting all threads
 exports.getAll = (req, res) => {
   Thread.find()
     .then((threads) => res.json(threads))
+    .catch((err) => res.status(400).json("Error: " + err));
+};
+
+// getting one thread by Id
+exports.findThread = (req, res) => {
+  Thread.findById(req.params.id)
+    .then((threads) => {
+      console.log(threads);
+      res.json(threads);
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 };
 

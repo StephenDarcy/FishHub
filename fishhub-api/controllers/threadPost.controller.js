@@ -1,4 +1,5 @@
-const { ThreadPost } = require("../models/threadPost.model");
+const db = require("../models");
+const ThreadPost = db.threadPosts;
 const jwt = require("jsonwebtoken");
 
 // getting all threadPosts

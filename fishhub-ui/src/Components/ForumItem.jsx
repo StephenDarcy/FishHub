@@ -6,6 +6,7 @@ import UserService from "../Services/UserService";
 import UserAvatar from "./UserAvatar";
 import SampleUserImg from "../Images/sample-user.png";
 import { useNavigate } from "react-router-dom";
+import "../Styles/ForumItem.css";
 
 export default function ForumItem(props) {
   const navigate = useNavigate();
@@ -53,9 +54,14 @@ export default function ForumItem(props) {
 
   return (
     <>
-      <Row onClick={handleClick}>
-        <Col>
-          <UserAvatar img={SampleUserImg} avatar={avatar} />
+      <Row onClick={handleClick} className="forum-item">
+        <Col className="user-col">
+          <UserAvatar
+            height={50}
+            width={50}
+            img={SampleUserImg}
+            avatar={avatar}
+          />
         </Col>
         <Col xs={7}>{props.topic}</Col>
         <Col></Col>

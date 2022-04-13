@@ -1,8 +1,17 @@
 .forum-box {
-  padding: 2%;
+  padding: 5%;
 }
 
 .top-row {
+  height: 8%;
+}
+
+.headings-row {
+  height: 4%;
+}
+
+.content-row {
+  height: 85%;
 }
 
 .top-mid-col {

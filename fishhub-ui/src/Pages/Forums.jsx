@@ -11,7 +11,7 @@ import ReactPaginate from "react-paginate";
 import ForumItems from "../Components/ForumItems";
 
 export default function Forums() {
-  let itemsPerPage = 3;
+  let itemsPerPage = 8;
   const { loggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState({
     username: "",
@@ -45,26 +45,10 @@ export default function Forums() {
 
   useEffect(() => {
     async function getThreads() {
-      await ThreadService.getAll().then(() => {});
+      await ThreadService.getAll().then((response) => {
+        setItems(response.data);
+      });
     }
-    setItems([
-      {
-        topic: "Top 10 Aquarium Fish",
-        body: "What are your top 10 aquarium fish in order?",
-        createdBy: "623a5c439953b6e23466b3f7",
-        createdAt: "2022-04-10T23:15:37.922Z",
-        updatedAt: "2022-04-10T23:15:37.922Z",
-        id: "62536519e90df7e96ac2e45f",
-      },
-      {
-        topic: "Help sick fish!",
-        body: "My sick has small white spots on fins what could they be?",
-        createdBy: "623a5c439953b6e23466b3f7",
-        createdAt: "2022-04-10T23:16:50.326Z",
-        updatedAt: "2022-04-10T23:16:50.326Z",
-        id: "62536562b52e49cdc7657648",
-      },
-    ]);
 
     getThreads();
   }, []);
@@ -91,27 +75,31 @@ export default function Forums() {
           <CreateThread username={userData.username} />
         </Col>
       </Row>
-      <Row>
+      <Row className="headings-row">
         <Col>User</Col>
         <Col xs={7}>Topic</Col>
         <Col>Replies</Col>
         <Col>Posted On</Col>
       </Row>
-      <ForumItems currentItems={currentItems} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="Next →"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="← Previous"
-        renderOnZeroPageCount={null}
-        activeClassName={"pagination__link--active"}
-        disabledClassName={"pagination__link--disabled"}
-        nextLinkClassName={"pagination__link"}
-        previousLinkClassName={"pagination__link"}
-        containerClassName={"pagination"}
-      />
+      <Row className="content-row">
+        <ForumItems currentItems={currentItems} />
+      </Row>
+      <Row>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next →"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="← Previous"
+          renderOnZeroPageCount={null}
+          activeClassName={"pagination__link--active"}
+          disabledClassName={"pagination__link--disabled"}
+          nextLinkClassName={"pagination__link"}
+          previousLinkClassName={"pagination__link"}
+          containerClassName={"pagination"}
+        />
+      </Row>
     </Container>
   );
 }

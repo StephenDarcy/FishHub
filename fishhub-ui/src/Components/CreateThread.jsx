@@ -17,13 +17,13 @@ export default function CreateThread(props) {
   const [data, setData] = useState(false);
   const [topic, setTopic] = useState("");
   const [body, setBody] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [username, setUsername] = useState(props.username);
+  const [username, setUsername] = useState("");
 
   const [loading, setLoading] = useState(false);
   const { loggedIn } = useContext(AuthContext);
 
   const handleClickOpen = () => {
+    setUsername(props.username);
     setOpen(true);
   };
 

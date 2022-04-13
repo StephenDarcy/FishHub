@@ -8,15 +8,14 @@ export default function ForumItems({ currentItems }) {
       {currentItems &&
         currentItems.map((item) => (
           // eslint-disable-next-line react/jsx-key
-          <div>
-            <ForumItem
-              body={item.body}
-              topic={item.topic}
-              createdBy={item.createdBy}
-              createdAt={item.createdAt}
-              id={item.id}
-            />
-          </div>
+          <ForumItem
+            style={{ height: "100%" }}
+            body={item.body}
+            topic={item.topic}
+            createdBy={item.createdBy}
+            createdAt={item.createdAt}
+            id={item.id}
+          />
         ))}
     </>
   );

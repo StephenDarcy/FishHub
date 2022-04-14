@@ -1,17 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SampleUserImg from "../Images/sample-user.png";
 import PropTypes from "prop-types";
-import UserService from "../Services/UserService";
 import ReactAvatar from "./ReactAvatar";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import "../Styles/UploadImageDialog.css";
 
 export default function UploadImageDialog(props) {
   const [open, setOpen] = useState(false);
@@ -27,7 +25,13 @@ export default function UploadImageDialog(props) {
 
   return (
     <>
-      <h6 onClick={handleClickOpen}>Upload a new image</h6>
+      <h6
+        style={{ paddingTop: "1vh" }}
+        className="upload-text"
+        onClick={handleClickOpen}
+      >
+        Upload a new image
+      </h6>
       <Dialog
         open={open}
         onClose={handleClose}

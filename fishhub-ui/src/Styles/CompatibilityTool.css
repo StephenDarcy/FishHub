@@ -1,15 +1,10 @@
 .compatibility-container {
-  width: 100%;
-  height: 100%;
-  background-color: #d3e3fc;
+  background-color: #151a24;
   padding: 3%;
   text-align: center;
 }
 
 .profile-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 2vh;
 }
 
@@ -18,5 +13,5 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }

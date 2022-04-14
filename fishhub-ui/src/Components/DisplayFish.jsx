@@ -91,8 +91,17 @@ export default function DisplayFish(props) {
   }, [props.species]);
 
   return (
-    <Card sx={{ minWidth: 345, maxWidth: 600, m: 2 }}>
+    <Card
+      sx={{
+        minWidth: 345,
+        maxWidth: 600,
+        m: 2,
+        backgroundColor: "white",
+        boxShadow: "0px 0px 4px 0px #0d6efd",
+      }}
+    >
       <CardHeader
+        sx={{ color: "#0d6efd", borderBottom: "2px solid #0d6efd" }}
         action={
           loading ? null : <IconButton aria-label="settings"></IconButton>
         }
@@ -120,7 +129,7 @@ export default function DisplayFish(props) {
         <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
-          style={{ height: 300 }}
+          style={{ height: 300, backgroundColor: "white", padding: 50 }}
           component="img"
           image={data.image}
           alt="Species Image"

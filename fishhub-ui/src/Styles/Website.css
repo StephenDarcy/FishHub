@@ -9,10 +9,5 @@
 
 .body-row {
   height: 92vh;
-  background: rgb(212, 228, 252);
-  background: linear-gradient(
-    180deg,
-    rgba(212, 228, 252, 1) 0%,
-    rgba(119, 166, 247, 1) 100%
-  );
+  background: #151a24;
 }

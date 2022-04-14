@@ -1,10 +1,9 @@
 .navbar {
-  background-color: white;
-  border-bottom: 0.2rem solid #77a6f7;
+  background-color: #1a1a1b;
+  border-bottom: 0.2rem solid #0d6efd;
   height: 100%;
-  padding: 0;
+  padding: 2%;
   margin: 0;
-  box-shadow: 0px 0px 7px 0px #b1b1b1;
 }
 
 .sidebar-item {
@@ -37,12 +36,13 @@
 
 .sidebar-item:hover {
   text-decoration: none;
-  background-color: black;
+  background-color: #0d6efd;
   border-radius: 5%;
+  padding: 5%;
 }
 
 .sidebar {
-  background-color: #77a6f7;
+  background-color: #1a1a1b;
   width: 30vw;
   padding: 0;
 }
@@ -53,8 +53,7 @@
 
 .icon {
   cursor: pointer;
-  color: #77a6f7;
-  border-radius: 100%;
+  color: #0d6efd;
 }
 
 .icon:hover {
@@ -76,7 +75,7 @@
   margin: auto;
   height: 3vh;
   margin-top: 15%;
-  margin-bottom: 15%;
+  margin-bottom: 5%;
 }
 
 .icon-span {
@@ -86,7 +85,6 @@
 /* Mobile Phone Responsiveness */
 @media screen and (max-width: 1400px) {
   .sidebar {
-    background-color: #77a6f7;
     width: 40vw;
   }
 }
@@ -94,7 +92,13 @@
 /* Mobile Phone Responsiveness */
 @media screen and (max-width: 1100px) {
   .sidebar {
-    background-color: #77a6f7;
     width: 45vw;
+  }
+}
+
+/* Mobile Phone Responsiveness */
+@media screen and (max-width: 900px) {
+  .sidebar {
+    width: 100vw;
   }
 }

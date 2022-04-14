@@ -35,69 +35,85 @@ export default function EditProfile() {
   return (
     <>
       <Row>
-        <h2 className="headline">Edit Profile</h2>
+        <h2 style={{ color: "#b9b9b9" }} className="headline">
+          Edit Your Profile
+        </h2>
       </Row>
       <Row className="avatar-row">
-        <Col></Col>
-        <Col>
-          <UserAvatar img={image} avatar={data.avatar} />
-          <UploadImageDialog setImage={handleSetImage} />
-        </Col>
-        <Col></Col>
+        <UserAvatar img={image} avatar={data.avatar} />
+        <UploadImageDialog setImage={handleSetImage} />
       </Row>
       <Row className="form-row">
         <Form>
           <Row>
             <Col sm={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
+              <Form.Group className="mb-2">
+                <Form.Label>
+                  <h6>First Name</h6>
+                </Form.Label>
                 <Form.Control type="text" placeholder="Enter first name" />
               </Form.Group>
             </Col>
             <Col sm={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Surname</Form.Label>
+              <Form.Group className="mb-2">
+                <Form.Label>
+                  <h6>Surname</h6>
+                </Form.Label>
                 <Form.Control type="text" placeholder="Enter surname" />
               </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                defaultValue={data.username}
-                type="text"
-                placeholder="Enter username"
-              />
-            </Form.Group>
+            <Col sm={6}>
+              <Form.Group className="mb-2">
+                <Form.Label>
+                  <h6>Username</h6>
+                </Form.Label>
+                <Form.Control
+                  disabled
+                  defaultValue={data.username}
+                  type="text"
+                  placeholder="Enter username"
+                />
+              </Form.Group>
+            </Col>
+            <Col sm={6}>
+              <Form.Group className="mb-2">
+                <Form.Label>
+                  <h6>Email</h6>
+                </Form.Label>
+                <Form.Control
+                  disabled
+                  defaultValue={data.email}
+                  type="email"
+                  placeholder="Enter email"
+                />
+              </Form.Group>
+            </Col>
           </Row>
+          <Row></Row>
           <Row>
-            <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                disabled
-                defaultValue={data.email}
-                type="email"
-                placeholder="Enter email"
-              />
-            </Form.Group>
-          </Row>
-          <Row>
-            <Form.Group className="mb-3">
-              <Form.Label>Contact number</Form.Label>
+            <Form.Group className="mb-2">
+              <Form.Label>
+                <h6>Contact number</h6>
+              </Form.Label>
               <Form.Control type="text" placeholder="Enter number" />
             </Form.Group>
           </Row>
           <Row>
             <Col sm={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Country</Form.Label>
+                <Form.Label>
+                  <h6>Country</h6>
+                </Form.Label>
                 <Form.Control type="text" placeholder="Enter country" />
               </Form.Group>
             </Col>
             <Col sm={6}>
               <Form.Group className="mb-3">
-                <Form.Label>City</Form.Label>
+                <Form.Label>
+                  <h6>City</h6>
+                </Form.Label>
                 <Form.Control type="text" placeholder="Enter city" />
               </Form.Group>
             </Col>

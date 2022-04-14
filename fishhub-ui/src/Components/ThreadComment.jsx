@@ -17,7 +17,10 @@ export default function ThreadComment(props) {
 
   useEffect(() => {
     async function getUser() {
-      await UserService.getUserAvatar().then((response) => {
+      let data = {
+        avatar: data.avatar,
+      };
+      await UserService.getUserAvatar(data).then((response) => {
         setAvatar(response.data);
       });
     }
@@ -60,7 +63,12 @@ export default function ThreadComment(props) {
     <Container>
       <Row>
         <Col>
-          <UserAvatar img={SampleUserImg} avatar={avatar} />
+          <UserAvatar
+            height={35}
+            width={35}
+            img={SampleUserImg}
+            avatar={avatar}
+          />
         </Col>
         <Col xs={11}>
           {loading ? (
@@ -68,10 +76,22 @@ export default function ThreadComment(props) {
           ) : (
             <>
               <Row>
-                <Col>{data.username}</Col>
-                <Col style={{ textAlign: "right" }}>{getCreatedAt()}</Col>
+                <Col>
+                  <p style={{ color: "#dcdcdc", fontSize: "2vw" }}>
+                    {data.username}
+                  </p>
+                </Col>
+                <Col style={{ textAlign: "right" }}>
+                  <p style={{ color: "#dcdcdc", fontSize: "2vw" }}>
+                    {getCreatedAt()}
+                  </p>
+                </Col>
               </Row>
-              <Row>{data.body}</Row>
+              <Row>
+                <p style={{ color: "#dcdcdc", fontSize: "1.5vw" }}>
+                  {data.body}
+                </p>
+              </Row>
             </>
           )}
         </Col>

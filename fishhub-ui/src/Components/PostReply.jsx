@@ -5,17 +5,15 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../Styles/CreateThread.css";
 import AuthContext from "../Context/Auth";
 import Form from "react-bootstrap/Form";
-import ThreadService from "../Services/ThreadService";
+import ThreadPostService from "../Services/ThreadPostService";
 
-export default function CreateThread(props) {
+export default function PostReply(props) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(false);
-  const [topic, setTopic] = useState("");
   const [body, setBody] = useState("");
   const [username, setUsername] = useState("");
 
@@ -32,20 +30,25 @@ export default function CreateThread(props) {
   };
 
   const handleCreate = () => {
-    console.log(topic, body);
+    console.log(body);
     setLoading(true);
     setData({
-      topic: topic,
+      threadId: props.id,
       body: body,
       username: username,
     });
   };
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   useEffect(() => {
     async function createThread(data) {
-      await ThreadService.create(data).then(() => {
+      await ThreadPostService.create(data).then(() => {
         setLoading(false);
         setOpen(false);
+        refreshPage();
       });
     }
     createThread(data);
@@ -56,7 +59,7 @@ export default function CreateThread(props) {
       {loggedIn ? (
         <>
           <Button variant="outlined" onClick={handleClickOpen}>
-            <h6 style={{ fontSize: "1vw" }}>Create a thread</h6>
+            <h6 style={{ fontSize: "1.5vw" }}>Reply</h6>
           </Button>
           <Dialog
             open={open}
@@ -65,32 +68,18 @@ export default function CreateThread(props) {
               sx: { width: "100%", height: "60%", alignItems: "center" },
             }}
           >
-            <DialogTitle>Start a Discussion</DialogTitle>
-
             <DialogContent sx={{ width: "100%" }}>
               {loading ? (
                 <CircularProgress />
               ) : (
                 <>
                   <DialogContentText sx={{ textAlign: "center" }}>
-                    Give your discussion a meaningful title and body
+                    Write your reply below
                   </DialogContentText>
                   <Form>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Title</Form.Label>
+                    <Form.Group className="mt-1" style={{ height: 250 }}>
                       <Form.Control
-                        type="text"
-                        placeholder="Enter discussion topic here"
-                        onChange={(e) => {
-                          setTopic(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" style={{ height: 200 }}>
-                      <Form.Label>Body</Form.Label>
-                      <Form.Control
-                        style={{ height: 200, resize: "none" }}
+                        style={{ height: 250, resize: "none" }}
                         type="text"
                         as="textarea"
                         placeholder="Enter text here"
@@ -106,7 +95,7 @@ export default function CreateThread(props) {
 
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleCreate}>Create</Button>
+              <Button onClick={handleCreate}>Post Reply</Button>
             </DialogActions>
           </Dialog>
         </>

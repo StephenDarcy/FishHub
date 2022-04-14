@@ -12,13 +12,12 @@ export default function UserAvatar(props) {
   };
   return (
     <Avatar
-      className="icon"
       src={getImage()}
       alt="User"
       sx={{
         width: props.width || 120,
         height: props.height || 120,
-        border: "1px solid #b9b9b9",
+        border: "1.5px solid #b9b9b9",
       }}
     />
   );

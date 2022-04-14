@@ -63,9 +63,17 @@ export default function ForumItem(props) {
             avatar={avatar}
           />
         </Col>
-        <Col xs={7}>{props.topic}</Col>
-        <Col></Col>
-        <Col>{getCreatedAt()}</Col>
+        <Col xs={7}>
+          <p style={{ color: "#dcdcdc", fontSize: "2vw" }}>{props.topic}</p>
+        </Col>
+        <Col>
+          <p style={{ color: "#dcdcdc", fontSize: "1.5vw" }}></p>
+        </Col>
+        <Col>
+          <p style={{ color: "#dcdcdc", fontSize: "1.5vw" }}>
+            {getCreatedAt()}
+          </p>
+        </Col>
       </Row>
     </>
   );

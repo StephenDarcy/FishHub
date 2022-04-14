@@ -1,17 +1,18 @@
 .forum-box {
+  background-color: #151a24;
   padding: 2%;
 }
 
-.top-row {
-  height: 8%;
+h3 {
+  color: #dcdcdc;
 }
 
 .headings-row {
-  height: 4%;
+  color: #dcdcdc;
 }
 
 .content-row {
-  height: 85%;
+  height: 75%;
 }
 
 .top-mid-col {
@@ -32,8 +33,8 @@
 .pagination a {
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #77a6f7;
-  color: #77a6f7;
+  color: #0d6efd;
+  background: #dcdcdc;
 }
 
 .pagination__link {
@@ -42,7 +43,7 @@
 
 .pagination__link--active a {
   color: #fff;
-  background: #77a6f7;
+  background: #0d6efd;
 }
 
 .pagination__link--disabled a {

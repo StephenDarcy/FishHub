@@ -16,8 +16,8 @@ export default class ReactAvatar extends React.Component {
     scale: 1,
     rotate: 0,
     borderRadius: 50,
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
     disableCanvasRotation: false,
     isTransparent: false,
     backgroundColor: null,
@@ -27,12 +27,17 @@ export default class ReactAvatar extends React.Component {
     this.setState({ image: e.target.files[0] });
   };
 
+  refreshPage() {
+    window.location.reload(false);
+  }
+
   handleUpload = async (img) => {
     let data = {
       avatar: img,
     };
     await UserService.uploadAvatar(data).then(() => {
       console.log("sent");
+      this.refreshPage();
     });
   };
 

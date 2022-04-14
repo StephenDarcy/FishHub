@@ -1,6 +1,6 @@
 .login-box {
   background-color: white;
-  width: 40vw;
+  width: 80vw;
   height: 70vh;
   border-radius: 1%;
   box-shadow: 3px 3px 3px #696969;
@@ -20,12 +20,12 @@
 }
 
 .btn {
-  background-color: #77a6f7;
+  background-color: #0d6efd;
   border: 0px;
 }
 
 .btn:hover {
-  background-color: #77a6f7;
+  background-color: #0d6efd;
 }
 
 .signup-link {

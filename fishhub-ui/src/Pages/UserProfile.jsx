@@ -16,7 +16,10 @@ export default function UserProfile() {
         <Row className="tabbed-container-row">
           <Col sm={3} className="left-pane">
             <Nav variant="tabs" className="flex-column left-nav">
-              <Nav.Item className="nav-item">
+              <Nav.Item
+                className="nav-item"
+                activeStyle={{ backgroundColor: "orange" }}
+              >
                 <Nav.Link className="nav-link" eventKey="first">
                   <Col sm={3}>
                     <MdEdit />

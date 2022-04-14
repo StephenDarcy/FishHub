@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { FcApproval, FcCancel } from "react-icons/fc";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function CompatibilityCalculator(props) {
   let fish1 = props.first;
@@ -56,7 +59,51 @@ export default function CompatibilityCalculator(props) {
     }
   }, [fish1, fish2]);
 
-  return <>{complete ? <>Compatible</> : <>Not</>}</>;
+  return (
+    <>
+      {complete ? (
+        <Row>
+          <Col sm={4}></Col>
+          <Col>
+            <FcApproval size="50" style={{ textAlign: "right" }} />
+          </Col>
+          <Col>
+            <h3
+              style={{
+                color: "#8bc34a",
+                width: "100%",
+                textAlign: "left",
+                paddingTop: 7,
+              }}
+            >
+              Compatible
+            </h3>
+          </Col>
+          <Col sm={4}></Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col sm={4}></Col>
+          <Col style={{ textAlign: "right" }}>
+            <FcCancel size="50" />
+          </Col>
+          <Col>
+            <h3
+              style={{
+                color: "red",
+                width: "100%",
+                textAlign: "left",
+                paddingTop: 7,
+              }}
+            >
+              Incompatible
+            </h3>
+          </Col>
+          <Col sm={4}></Col>
+        </Row>
+      )}
+    </>
+  );
 }
 
 CompatibilityCalculator.propTypes = {

@@ -7,7 +7,6 @@ import BootstrapNavbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "../Styles/Navbar.css";
-import logo from "../Images/logo-transparent-blue.png";
 import logoWhite from "../Images/logo-transparent-white.png";
 import AuthContext from "../Context/Auth";
 import LogOut from "./LogOut";
@@ -15,6 +14,8 @@ import UserService from "../Services/UserService";
 import Avatar from "@mui/material/Avatar";
 import SampleUserImg from "../Images/sample-user.png";
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import FishHubLogo from "./FishHubLogo";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -50,41 +51,56 @@ function Navbar() {
   return (
     <>
       <BootstrapNavbar className="navbar">
-        <Container fluid>
+        <Container style={{ backgroundColor: "#1a1a1b" }}>
           <Col>
             <MenuIcon className="icon" onClick={handleShow} size="30" />
           </Col>
-          <Col>
-            <BootstrapNavbar.Brand>
-              <Link to="/">
-                <img src={logo} alt="FishHub" className="logo" />
-              </Link>
-            </BootstrapNavbar.Brand>
+          <Col xs={6} md={8}>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <FishHubLogo></FishHubLogo>
+            </Link>
           </Col>
-
-          {loggedIn === false && (
-            <>
-              <Link to="/login">
-                <h2>Login</h2>
-              </Link>
-              <Link to="/signup">
-                <h2>Register</h2>
-              </Link>
-            </>
-          )}
-          {loggedIn === true && (
-            <>
-              <Link to={"/profile/" + userID}>
-                <Avatar
-                  className="icon"
-                  src={getImage()}
-                  alt="User"
-                  sx={{ width: 35, height: 35, border: "1px solid #b9b9b9" }}
-                />
-              </Link>
-              <LogOut />
-            </>
-          )}
+          <Col style={{ textAlign: "center" }}>
+            {loggedIn === false && (
+              <Row>
+                <Col xs={6} style={{ paddingTop: 8 }}>
+                  <Link to="/login" style={{ textDecoration: "none" }}>
+                    <h6 style={{ fontSize: "2vw" }}>Login</h6>
+                  </Link>
+                </Col>
+                <Col xs={6} style={{ paddingTop: 8 }}>
+                  <Link to="/signup" style={{ textDecoration: "none" }}>
+                    <h6 style={{ fontSize: "2vw" }}>Register</h6>
+                  </Link>
+                </Col>
+              </Row>
+            )}
+            {loggedIn === true && (
+              <Row>
+                <Col xs={6} style={{ padding: 0 }}>
+                  <Link
+                    to={"/profile/" + userID}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Avatar
+                      className="icon"
+                      src={getImage()}
+                      alt="User"
+                      sx={{
+                        width: 35,
+                        height: 35,
+                        border: "2px solid #0d6efd",
+                        float: "right",
+                      }}
+                    />
+                  </Link>
+                </Col>
+                <Col xs={6} style={{ padding: 0 }}>
+                  <LogOut />
+                </Col>
+              </Row>
+            )}
+          </Col>
 
           <Offcanvas show={show} start className="sidebar">
             <Offcanvas.Header>
@@ -101,7 +117,7 @@ function Navbar() {
               {SidebarItems.map((item, index) => {
                 return (
                   <li key={index} className={item.class}>
-                    <Link to={item.path}>
+                    <Link to={item.path} onClick={handleClose}>
                       {item.icon}
                       <span className="icon-span">{item.sidebarItem}</span>
                     </Link>

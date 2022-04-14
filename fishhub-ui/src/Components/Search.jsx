@@ -14,6 +14,7 @@ import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles({
   root: {
@@ -33,22 +34,25 @@ function Search() {
   const classes = useStyles();
   const [pageState, setPageState] = useState("searching");
   const [data, setData] = useState([]);
-  const [fish, setFish] = useState("");
-  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  let handleSearch = async (e) => {
-    e.preventDefault();
+  let handleSearch = async () => {
     setLoading(true);
-    setPageState("results");
-    await FishService.getScientific(search)
+    await FishService.getScientific(watch("search"))
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
 
         if (response.status === 200) {
           setLoading(false);
+          setPageState("results");
           setData([]);
           setData(refineData(response.data));
           //if only one result redirect
@@ -73,22 +77,25 @@ function Search() {
       {pageState === "searching" && (
         <Container className="search-container">
           <Row className="fishhub-search">
-            <h1 className="logo-main-text">
+            <h1 className="logo-main-text" style={{ fontSize: "8vw" }}>
               fishhub search{" "}
               <IconContext.Provider value={{ className: "logo-icon" }}>
-                <SearchIcon style={{ textShadow: "1px 1px 1px #696969" }} />
+                <SearchIcon />
               </IconContext.Provider>
             </h1>
             <h2 className="logo-sub-text">
               browse over 34,800 species of fish
             </h2>
           </Row>
-          <form onSubmit={handleSearch}>
+          <form
+            onSubmit={handleSubmit(handleSearch)}
+            style={{ paddingLeft: "10%", paddingRight: "10%" }}
+          >
             <Row>
+              {errors.search && <p>Invalid Search</p>}
               <TextField
                 className={classes.root}
                 type="text"
-                onChange={(e) => setFish(e.target.value)}
                 placeholder="Search here for a fish"
                 InputProps={{
                   endAdornment: (
@@ -99,22 +106,19 @@ function Search() {
                 }}
                 sx={{
                   width: "100%",
-                  border: "3px solid #77a6f7",
+                  border: "3px solid #0d6efd",
                   height: "100%",
                   borderRadius: "10px",
                   outline: "none",
                   backgroundColor: "white",
                 }}
+                {...register("search", { required: "Required" })}
               />
             </Row>
 
             <Row xs={1} sm={1} md={2}>
               <Col className="btn-col">
-                <Button
-                  className="search-btn"
-                  type="submit"
-                  onClick={() => setSearch(fish)}
-                >
+                <Button className="search-btn" type="submit">
                   Normal Search
                 </Button>
               </Col>

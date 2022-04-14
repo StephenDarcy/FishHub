@@ -56,7 +56,7 @@ export default function ThreadPost(props) {
     }
   };
   return (
-    <Container>
+    <Container className="mb-5">
       <Row style={{ borderTop: "1px solid #b9b9b9" }}>
         <Col>
           <UserAvatar
@@ -72,10 +72,22 @@ export default function ThreadPost(props) {
           ) : (
             <>
               <Row>
-                <Col>{data.username}</Col>
-                <Col style={{ textAlign: "right" }}>{getCreatedAt()}</Col>
+                <Col>
+                  <p style={{ color: "#dcdcdc", fontSize: "2vw" }}>
+                    {data.username}
+                  </p>
+                </Col>
+                <Col style={{ textAlign: "right" }}>
+                  <p style={{ color: "#dcdcdc", fontSize: "2vw" }}>
+                    {getCreatedAt()}
+                  </p>
+                </Col>
               </Row>
-              <Row>{data.body}</Row>
+              <Row>
+                <p style={{ color: "#dcdcdc", fontSize: "1.5vw" }}>
+                  {data.body}
+                </p>
+              </Row>
             </>
           )}
         </Col>

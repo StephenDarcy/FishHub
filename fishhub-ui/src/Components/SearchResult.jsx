@@ -25,8 +25,8 @@ function SearchResult(props) {
       <CardContent>
         <img
           className="search-image"
-          src={"http://localhost:6868/api/image/" + props.Species}
-          alt={noImage}
+          src={"http://localhost:6868/api/image/" + props.Species || noImage}
+          alt="Image of Species"
         ></img>
         Common Name(s): {props.ComName}
         <br />

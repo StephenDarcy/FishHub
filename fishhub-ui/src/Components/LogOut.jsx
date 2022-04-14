@@ -4,6 +4,7 @@ import UserService from "../Services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { BiLogOut } from "react-icons/bi";
+import "../Styles/Logout.css";
 
 export default function LogOut() {
   const { getLoggedIn } = useContext(AuthContext);
@@ -24,8 +25,9 @@ export default function LogOut() {
 
   return (
     <BiLogOut
-      style={{ width: 35, height: 35, color: "#77a6f7", marginLeft: 5 }}
+      style={{ width: 35, height: 35, color: "#0d6efd" }}
       onClick={logOut}
+      className="logout"
     >
       Logout
     </BiLogOut>

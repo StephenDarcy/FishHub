@@ -1,6 +1,8 @@
 .species-profile {
+  text-align: center;
   width: 100%;
   height: 100%;
-  background-color: #d3e3fc;
+  background-color: #151a24;
   padding: 3%;
+  border: 0;
 }

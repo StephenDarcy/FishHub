@@ -1,11 +1,6 @@
 import React from "react";
 import { ImHome3 as HomeIcon } from "react-icons/im";
-import {
-  GiDoubleFish as FishIcon,
-  GiBubbles as C02Icon,
-  GiResize as SizeIcon,
-} from "react-icons/gi";
-import { FaSearchPlus as SearchIcon } from "react-icons/fa";
+import { GiDoubleFish as FishIcon, GiBubbles as C02Icon } from "react-icons/gi";
 import { AiFillCopy as ForumsIcon } from "react-icons/ai";
 
 export const SidebarData = [
@@ -22,22 +17,10 @@ export const SidebarData = [
     icon: <FishIcon />,
   },
   {
-    sidebarItem: "Advanced Search",
-    path: "/adv-search",
-    class: "sidebar-item",
-    icon: <SearchIcon />,
-  },
-  {
-    sidebarItem: "Dissolved C02 Calculator",
-    path: "/c02",
+    sidebarItem: "Aquarium Calculators",
+    path: "/calculators",
     class: "sidebar-item",
     icon: <C02Icon />,
-  },
-  {
-    sidebarItem: "Aquarium Size Calculator",
-    path: "/size",
-    class: "sidebar-item",
-    icon: <SizeIcon />,
   },
   {
     sidebarItem: "Forums",

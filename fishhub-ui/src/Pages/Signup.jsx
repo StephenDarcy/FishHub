@@ -59,10 +59,16 @@ export default function Signup() {
   };
 
   return (
-    <Container fluid>
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Container fluid className="signup-box">
         <h1>Create Account</h1>
-        <h6>Join the FishHub community</h6>
+        <h6 className="mb-3">Join the FishHub community</h6>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <InputGroup>
@@ -121,9 +127,6 @@ export default function Signup() {
                 placeholder="Confirm password"
               />
             </InputGroup>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Remember me" />
           </Form.Group>
 
           <Button variant="primary" type="submit">

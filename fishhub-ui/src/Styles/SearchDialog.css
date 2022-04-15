@@ -1,9 +1,13 @@
 .search-results:hover {
   cursor: pointer;
   box-shadow: 1px 1px 1px #696969;
-  border-radius: 1.5%;
+  border-radius: 20px;
 }
 
 .search-results {
   margin: 1%;
+}
+
+.search-head {
+  font-size: small !important;
 }

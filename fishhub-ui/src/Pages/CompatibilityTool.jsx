@@ -31,8 +31,8 @@ export default function CompatibilityTool() {
   return (
     <Container className="compatibility-container">
       <Row>
-        <h1 style={{ color: "#0d6efd" }}>Fish Comparison</h1>
-        <h2 style={{ color: "#0d6efd" }}>
+        <h1 style={{ color: "#dcdcdc" }}>Fish Comparison</h1>
+        <h2 style={{ color: "#dcdcdc" }}>
           Check the compatibility of fish based on water parameters
         </h2>
       </Row>
@@ -67,7 +67,7 @@ export default function CompatibilityTool() {
             second={secondFishData}
           />
         ) : (
-          <h2 style={{ color: "#0d6efd" }}>
+          <h2 style={{ color: "#dcdcdc" }}>
             Select two species of fish to compare their compatibility
           </h2>
         )}

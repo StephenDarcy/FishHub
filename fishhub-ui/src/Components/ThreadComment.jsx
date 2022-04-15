@@ -10,18 +10,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ThreadComment(props) {
   const [avatar, setAvatar] = useState();
+  const [id, setId] = useState();
   const [loading, isLoading] = useState(true);
-
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState();
 
   useEffect(() => {
-    async function getUser() {
-      let data = {
-        avatar: data.avatar,
-      };
-      await UserService.getUserAvatar(data).then((response) => {
-        setAvatar(response.data);
+    async function getID() {
+      await UserService.getID().then((response) => {
+        setId(response.data);
       });
     }
     async function setProps() {
@@ -30,8 +27,17 @@ export default function ThreadComment(props) {
     }
 
     setProps();
-    getUser();
+    getID();
   }, [props]);
+
+  useEffect(() => {
+    async function getAvatar() {
+      await UserService.getUserAvatar(id).then((response) => {
+        setAvatar(response.data);
+      });
+    }
+    getAvatar();
+  }, [id]);
 
   const getCreatedAt = () => {
     const monthList = [
@@ -61,7 +67,13 @@ export default function ThreadComment(props) {
 
   return (
     <Container>
-      <Row>
+      <Row
+        style={{
+          borderTop: "1px solid #b9b9b9",
+          paddingTop: 10,
+          paddingBottom: 10,
+        }}
+      >
         <Col>
           <UserAvatar
             height={35}

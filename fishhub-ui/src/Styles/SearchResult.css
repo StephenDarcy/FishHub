@@ -1,10 +1,11 @@
 .result-card {
   width: 100%;
-  margin-bottom: 1%;
+  margin-bottom: 2%;
 }
 
 .search-image {
-  width: 20%;
-  height: 20%;
-  border-radius: 2%;
+  width: 20;
+  height: 20;
+  border-radius: 50rem;
+  border: 2px solid #dcdcdc;
 }

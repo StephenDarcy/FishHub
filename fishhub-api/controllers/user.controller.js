@@ -207,11 +207,19 @@ exports.delete = (req, res) => {
 
 // Update a user by the id in the request
 exports.update = (req, res) => {
-  User.findById(req.params.id)
+  // get user ID from token
+  const token = req.cookies.token;
+  if (!token) return res.json("no cookie");
+
+  let id = getIdFromToken(token);
+
+  User.findById(id)
     .then((user) => {
-      user.username = req.body.username;
-      user.email = req.body.email;
-      user.password = req.body.password;
+      user.firstName = req.body.firstName;
+      user.surname = req.body.surname;
+      user.number = req.body.number;
+      user.country = req.body.country;
+      user.city = req.body.city;
 
       user
         .save()
@@ -223,6 +231,7 @@ exports.update = (req, res) => {
 
 // Find a user avatar by the id in the request
 exports.getUserAvatar = (req, res) => {
+  console.log(req.params.id);
   User.findById(req.params.id)
     .then((user) => {
       let avatar = user.avatar;

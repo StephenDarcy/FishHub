@@ -2,10 +2,10 @@
 import React, { useEffect, useState, createContext } from "react";
 import UserService from "../Services/UserService";
 
-const AuthContext = createContext();
+const AuthContext = createContext(false);
 
 function Auth(props) {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   async function getLoggedIn() {
     const response = await UserService.loggedIn();

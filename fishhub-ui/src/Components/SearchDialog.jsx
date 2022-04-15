@@ -70,7 +70,7 @@ export default function SearchDialog(props) {
         open={open}
         onClose={handleClose}
         PaperProps={{
-          sx: { width: "100%", height: "40%", alignItems: "center" },
+          sx: { width: "100%", height: "50%", alignItems: "center" },
         }}
       >
         <DialogTitle>Fishhub Search</DialogTitle>

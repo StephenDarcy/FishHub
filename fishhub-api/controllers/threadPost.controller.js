@@ -12,7 +12,6 @@ exports.getThreadPost = (req, res) => {
 // adding new threadPost to DB
 exports.create = async (req, res) => {
   try {
-    console.log(req.body);
     // Validate request
     if (!req.body.threadId || !req.body.body || !req.body.username) {
       res.status(400).send({ message: "ThreadPost info can not be empty!" });

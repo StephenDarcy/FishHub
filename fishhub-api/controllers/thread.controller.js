@@ -13,7 +13,6 @@ exports.getAll = (req, res) => {
 exports.findThread = (req, res) => {
   Thread.findById(req.params.id)
     .then((threads) => {
-      console.log(threads);
       res.json(threads);
     })
     .catch((err) => res.status(400).json("Error: " + err));
@@ -22,7 +21,6 @@ exports.findThread = (req, res) => {
 // adding new thread to DB
 exports.create = async (req, res) => {
   try {
-    console.log(req.body);
     // Validate request
     if (!req.body.topic || !req.body.body) {
       res.status(400).send({ message: "Thread info can not be empty!" });
@@ -39,8 +37,6 @@ exports.create = async (req, res) => {
     const body = req.body.body;
     const username = req.body.username;
     const createdBy = id;
-
-    console.log("Received: " + topic, body, createdBy);
 
     // creating new thread
     const newThread = new Thread({ topic, body, createdBy, username });

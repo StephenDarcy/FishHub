@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -48,23 +49,29 @@ export default function Login() {
   };
 
   return (
-    <Container fluid>
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Row className="login-row ">
         <Container fluid className="login-box">
           <Container fluid className="login-form">
             <Row className="form-row">
-              <h1 className>Welcome Back</h1>
+              <h1 className="mt-5">Welcome Back</h1>
             </Row>
 
             <Row className="form-row">
-              <h6>Login to your account</h6>
+              <h6 className="mb-3">Login to your account</h6>
             </Row>
 
             <Form>
               <Row className="form-row">
                 <Form.Group
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mb-3"
+                  className="mb-3 mt-3"
                   controlId="formBasicEmail"
                 >
                   <InputGroup>
@@ -79,7 +86,7 @@ export default function Login() {
               <Row className="form-row">
                 <Form.Group
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mb-3"
+                  className="mb-3 mt-3"
                   controlId="formBasicPassword"
                 >
                   <InputGroup>
@@ -91,18 +98,17 @@ export default function Login() {
                 </Form.Group>
               </Row>
 
-              <Row>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                  <Form.Check
-                    type="checkbox"
-                    className="form-check"
-                    label="Remember me"
-                  />
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Button onClick={handleSubmit}>Log In</Button>
+              <Row className="mt-3" xs={1}>
+                <Col>
+                  {" "}
+                  <Button
+                    style={{ width: "100%", float: "left" }}
+                    onClick={handleSubmit}
+                  >
+                    Log In
+                  </Button>
+                </Col>
+                <Col></Col>
               </Row>
             </Form>
 

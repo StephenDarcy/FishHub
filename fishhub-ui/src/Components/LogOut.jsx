@@ -25,7 +25,7 @@ export default function LogOut() {
 
   return (
     <BiLogOut
-      style={{ width: 35, height: 35, color: "#0d6efd" }}
+      style={{ width: 50, height: 50, color: "#0d6efd" }}
       onClick={logOut}
       className="logout"
     >

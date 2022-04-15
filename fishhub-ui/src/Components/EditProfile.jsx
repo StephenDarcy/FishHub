@@ -9,6 +9,7 @@ import UserAvatar from "./UserAvatar";
 import UploadImageDialog from "./UploadImageDialog";
 import SampleUserImg from "../Images/sample-user.png";
 import UserService from "../Services/UserService";
+import { useForm } from "react-hook-form";
 
 export default function EditProfile() {
   const [image, setImage] = useState(SampleUserImg);
@@ -16,6 +17,7 @@ export default function EditProfile() {
     username: "",
     email: "",
   });
+  const { register, handleSubmit, watch } = useForm();
 
   useEffect(() => {
     async function getUser() {
@@ -31,6 +33,36 @@ export default function EditProfile() {
     setImage(newImage);
   };
 
+  const onSubmit = () => {
+    let first = watch("first");
+    let surname = watch("surnames");
+    let number = watch("number");
+    let country = watch("country");
+    let city = watch("city");
+
+    let data = {
+      firstName: first,
+      surname: surname,
+      number: number,
+      country: country,
+      city: city,
+    };
+
+    updateUser(data);
+  };
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
+  const updateUser = async (data) => {
+    await UserService.update(data).then((response) => {
+      if (response.data == 200) {
+        refreshPage();
+      }
+    });
+  };
+
   console.log(data);
   return (
     <>
@@ -44,14 +76,19 @@ export default function EditProfile() {
         <UploadImageDialog setImage={handleSetImage} />
       </Row>
       <Row className="form-row">
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col sm={6}>
               <Form.Group className="mb-2">
                 <Form.Label>
                   <h6>First Name</h6>
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter first name" />
+                <Form.Control
+                  defaultValue={data.firstName || ""}
+                  {...register("first")}
+                  type="text"
+                  placeholder="Enter first name"
+                />
               </Form.Group>
             </Col>
             <Col sm={6}>
@@ -59,7 +96,12 @@ export default function EditProfile() {
                 <Form.Label>
                   <h6>Surname</h6>
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter surname" />
+                <Form.Control
+                  defaultValue={data.surname || ""}
+                  {...register("surname")}
+                  type="text"
+                  placeholder="Enter surname"
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -97,7 +139,12 @@ export default function EditProfile() {
               <Form.Label>
                 <h6>Contact number</h6>
               </Form.Label>
-              <Form.Control type="text" placeholder="Enter number" />
+              <Form.Control
+                defaultValue={data.number || ""}
+                {...register("number")}
+                type="text"
+                placeholder="Enter number"
+              />
             </Form.Group>
           </Row>
           <Row>
@@ -106,7 +153,12 @@ export default function EditProfile() {
                 <Form.Label>
                   <h6>Country</h6>
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter country" />
+                <Form.Control
+                  defaultValue={data.country || ""}
+                  {...register("country", { required: true })}
+                  type="text"
+                  placeholder="Enter country"
+                />
               </Form.Group>
             </Col>
             <Col sm={6}>
@@ -114,7 +166,12 @@ export default function EditProfile() {
                 <Form.Label>
                   <h6>City</h6>
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter city" />
+                <Form.Control
+                  defaultValue={data.city || ""}
+                  {...register("city")}
+                  type="text"
+                  placeholder="Enter city"
+                />
               </Form.Group>
             </Col>
           </Row>

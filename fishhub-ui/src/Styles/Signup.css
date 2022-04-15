@@ -1,12 +1,10 @@
 .signup-box {
-  background-color: white;
-  width: 40vw;
-  height: 70vh;
-  border-radius: 1%;
-  box-shadow: 3px 3px 3px #696969;
-  margin-top: 5%;
-  padding-top: 5%;
-  padding: 2%;
+  background-color: #1a1a1b;
+  width: 50vw;
+  height: 80vh;
+  border-radius: 20px;
+  border: 2px solid #dcdcdc;
+  padding: 5%;
 }
 
 .btn {

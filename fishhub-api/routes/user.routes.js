@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   router.get("/getUserAvatar/:id", users.getUserAvatar);
 
+  router.put("/", users.update);
+
   router.post("/", users.create);
 
   router.post("/avatar", users.avatar);

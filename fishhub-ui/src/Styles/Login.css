@@ -1,9 +1,10 @@
 .login-box {
-  background-color: white;
-  width: 80vw;
-  height: 70vh;
-  border-radius: 1%;
-  box-shadow: 3px 3px 3px #696969;
+  background-color: #1a1a1b;
+  width: 50vw;
+  height: 58vh;
+  border-radius: 20px;
+  border: 2px solid #dcdcdc;
+  padding: 5%;
 }
 
 .form-check {
@@ -15,7 +16,6 @@
 }
 
 .login-form {
-  margin-top: 10%;
   height: 80vh;
 }
 
@@ -45,7 +45,7 @@
 @media screen and (max-width: 750px) {
   .login-box {
     width: 80vw;
-    height: 90vh;
+    height: 70vh;
   }
 }
 /* Mobile Phone Responsiveness */

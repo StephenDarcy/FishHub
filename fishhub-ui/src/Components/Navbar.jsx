@@ -21,7 +21,7 @@ function Navbar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, getLoggedIn } = useContext(AuthContext);
   const [userID, setUserID] = useState();
   const [imgSrc, setImgSrc] = useState();
 
@@ -38,7 +38,7 @@ function Navbar() {
     }
 
     getUser();
-  }, []);
+  }, [loggedIn]);
 
   let getImage = () => {
     if (imgSrc) {
@@ -47,13 +47,13 @@ function Navbar() {
       return SampleUserImg;
     }
   };
-
+  getLoggedIn();
   return (
     <>
       <BootstrapNavbar className="navbar">
         <Container style={{ backgroundColor: "#1a1a1b" }}>
           <Col>
-            <MenuIcon className="icon" onClick={handleShow} size="30" />
+            <MenuIcon className="icon" onClick={handleShow} size="40" />
           </Col>
           <Col xs={6} md={8}>
             <Link to="/" style={{ textDecoration: "none" }}>
@@ -87,8 +87,8 @@ function Navbar() {
                       src={getImage()}
                       alt="User"
                       sx={{
-                        width: 35,
-                        height: 35,
+                        width: 50,
+                        height: 50,
                         border: "2px solid #0d6efd",
                         float: "right",
                       }}

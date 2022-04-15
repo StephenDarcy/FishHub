@@ -8,6 +8,9 @@ import "../Styles/SearchResult.css";
 import { Link } from "react-router-dom";
 import ImageService from "../Services/ImageService";
 import noImage from "../Images/no-image.webp";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Figure from "react-bootstrap/Figure";
 
 function SearchResult(props) {
   useEffect(() => {
@@ -21,16 +24,59 @@ function SearchResult(props) {
   };
 
   return (
-    <Card className="result-card" variant="outlined" onClick={handleClick}>
+    <Card
+      sx={{
+        backgroundColor: "#1a1a1b",
+        border: "2px solid #dcdcdc",
+        borderRadius: "20px",
+      }}
+      className="result-card"
+      variant="outlined"
+      onClick={handleClick}
+    >
       <CardContent>
-        <img
-          className="search-image"
-          src={"http://localhost:6868/api/image/" + props.Species || noImage}
-          alt="Image of Species"
-        ></img>
-        Common Name(s): {props.ComName}
-        <br />
-        Scientific Name: {props.Species}
+        <Row>
+          <Col sm={2}>
+            <Figure>
+              <Figure.Image
+                className="search-image"
+                src={"http://localhost:6868/api/image/" + props.Species}
+                alt={"Image of Species"}
+                width={350}
+                height={350}
+                onError={(e) => (e.target.src = noImage)}
+              ></Figure.Image>
+            </Figure>
+          </Col>
+          <Col style={{ color: "#dcdcdc" }}>
+            <Row>
+              <h1
+                className="search-head"
+                style={{ color: "#dcdcdc", fontSize: "3rem" }}
+              >
+                Common Name(s):
+              </h1>{" "}
+              <h2 className="search-head" style={{ fontSize: "2rem" }}>
+                {props.ComName}
+              </h2>
+            </Row>
+            <Row>
+              <h1
+                className="search-head"
+                style={{ color: "#dcdcdc", fontSize: "3rem" }}
+              >
+                Scientific Name:
+              </h1>
+              <h2 className="search-head" style={{ fontSize: "2rem" }}>
+                {props.Species}
+              </h2>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col></Col>
+        </Row>
       </CardContent>
       <CardActions>
         <Link to={`/${props.Species}`}>

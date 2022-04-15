@@ -8,8 +8,8 @@ const get = () => {
 const create = (data) => {
   return http.post("/users/", data);
 };
-const update = (id, data) => {
-  return http.put(`/users/${id}`, data);
+const update = (data) => {
+  return http.put(`/users/`, data);
 };
 const remove = (id) => {
   return http.delete(`/users/${id}`);

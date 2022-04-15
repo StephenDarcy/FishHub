@@ -57,7 +57,13 @@ export default function ThreadPost(props) {
   };
   return (
     <Container className="mb-5">
-      <Row style={{ borderTop: "1px solid #b9b9b9" }}>
+      <Row
+        style={{
+          borderTop: "1px solid #b9b9b9",
+          paddingTop: 10,
+          paddingBottom: 10,
+        }}
+      >
         <Col>
           <UserAvatar
             height={35}

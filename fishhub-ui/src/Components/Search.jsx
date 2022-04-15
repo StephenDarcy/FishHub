@@ -13,7 +13,6 @@ import { VscSearch as SearchIcon } from "react-icons/vsc";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { Scrollbars } from "react-custom-scrollbars-2";
 import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles({
@@ -72,6 +71,10 @@ function Search() {
     setPageState("searching");
   };
 
+  const redirectSci = () => {
+    navigate("/" + watch("search"));
+  };
+
   return (
     <>
       {pageState === "searching" && (
@@ -123,7 +126,7 @@ function Search() {
                 </Button>
               </Col>
               <Col className="btn-col">
-                <Button className="search-btn" type="submit">
+                <Button className="search-btn" onClick={redirectSci}>
                   Scientific Search
                 </Button>
               </Col>
@@ -133,20 +136,20 @@ function Search() {
       )}
       {pageState === "results" && (
         <Container className="results-page">
-          <h1>Your search returned several results</h1>
+          <h1 style={{ color: "#dcdcdc" }}>
+            Your search returned several results
+          </h1>
           <Button onClick={returnToSearch}>Return to search page</Button>
-          <Scrollbars style={{ height: "85%" }}>
-            {loading ? (
-              <FadeLoader size={500} />
-            ) : (
-              data.map((species) => (
-                <SearchResult
-                  key={species.SpecCode + species.ComName + species.Species}
-                  {...species}
-                />
-              ))
-            )}
-          </Scrollbars>
+          {loading ? (
+            <FadeLoader size={500} />
+          ) : (
+            data.map((species) => (
+              <SearchResult
+                key={species.SpecCode + species.ComName + species.Species}
+                {...species}
+              />
+            ))
+          )}
         </Container>
       )}
     </>

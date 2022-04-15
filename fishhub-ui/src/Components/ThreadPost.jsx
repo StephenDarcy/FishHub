@@ -66,8 +66,8 @@ export default function ThreadPost(props) {
       >
         <Col>
           <UserAvatar
-            height={35}
-            width={35}
+            height={50}
+            width={50}
             img={SampleUserImg}
             avatar={avatar}
           />

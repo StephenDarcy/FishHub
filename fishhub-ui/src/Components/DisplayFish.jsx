@@ -121,7 +121,7 @@ export default function DisplayFish(props) {
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            data.subTitle
+            <h6 style={{ color: "#dcdcdc" }}>{data.subTitle}</h6>
           )
         }
       />
@@ -147,7 +147,7 @@ export default function DisplayFish(props) {
             <Skeleton animation="wave" height={10} width="80%" />
           </React.Fragment>
         ) : (
-          <Typography variant="body2" color="text.secondary" component="p">
+          <Typography variant="body2" color="#dcdcdc" component="p">
             {data.bottomText}
           </Typography>
         )}

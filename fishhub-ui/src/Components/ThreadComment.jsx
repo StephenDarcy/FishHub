@@ -76,8 +76,8 @@ export default function ThreadComment(props) {
       >
         <Col>
           <UserAvatar
-            height={35}
-            width={35}
+            height={50}
+            width={50}
             img={SampleUserImg}
             avatar={avatar}
           />
